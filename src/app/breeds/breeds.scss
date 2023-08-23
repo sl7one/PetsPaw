@@ -1,0 +1,32 @@
+.breeds {
+   .page__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+   }
+
+   .sort {
+      background-color: var(--main-bg);
+      border: 2px solid transparent;
+      transition: border var(--transition);
+
+      svg {
+         fill: var(--gray-text);
+      }
+
+      &:hover {
+         border: 2px solid var(--primary-light);
+
+         svg {
+            fill: var(--primary);
+         }
+      }
+      &:hover svg {
+         fill: var(--primary);
+      }
+   }
+
+   .rout-name{
+      min-width: 143px;
+   }
+}

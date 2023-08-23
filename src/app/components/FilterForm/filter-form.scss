@@ -1,0 +1,28 @@
+.filter-form {
+   margin-top: 20px;
+   padding: 10px 20px;
+   background-color: rgba(248, 248, 247, 1);
+   border-radius: 20px;
+   &__top,
+   &__bottom {
+      display: flex;
+   }
+
+   &__item {
+      &:nth-child(2) {
+         margin-left: 20px;
+      }
+   }
+
+   &__bottom {
+      align-items: flex-end;
+   }
+   &__label {
+      font-size: 10px;
+      font-weight: 500;
+      line-height: calc(18 / 10);
+      text-align: left;
+      text-transform: uppercase;
+      color: rgba(140, 140, 140, 1);
+   }
+}

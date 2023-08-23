@@ -1,0 +1,20 @@
+.like-buttons {
+   display: flex;
+   border-radius: 20px;
+   outline: 4px solid var(--main-white);
+   background-color: var(--main-white);
+   gap: 4px;
+   overflow: hidden;
+   width: 248px;
+   position: absolute;
+   bottom: 0;
+   left: 50%;
+   transform: translate(-50%, 50%);
+
+   .button{
+      border-radius: unset;
+   }
+
+  
+
+}
