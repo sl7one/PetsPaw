@@ -12,25 +12,27 @@ import './voting.scss';
 import LikeButtons from '../components/LikeButtons/LikeButtons';
 import { useFetch } from '../hooks/useFeth';
 import Image from 'next/image';
+import Loader from '../components/Loader/Loader';
 
-type RandomItemType = {
-   id: string;
-   url: string;
-   width: number;
-   height: number;
-};
+// type RandomItemType = {
+//    id: string;
+//    url: string;
+//    width: number;
+//    height: number;
+// };
 
-interface IRandomPet {
-   data: [RandomItemType];
-   error: unknown;
-   isLoading: boolean;
-}
+// interface IRandomPet {
+//    data: [RandomItemType];
+//    error: unknown;
+//    isLoading: boolean;
+// }
 
 const Voting = () => {
-   const { data, isLoading, error } = useFetch(getRandom);
+   const { data, isLoading, error } = useFetch({
+      storage: false,
+      api_cb: getRandom,
+   });
 
-   if (!data.length) return;
-   const [{ id, url, width, height }] = data;
    return (
       <main className="home voting container">
          <LesftSection />
@@ -41,17 +43,21 @@ const Voting = () => {
             </div>
             <div className="page__body">
                <BackComponent />
-               <div className='wrapper'>
-                  <div className="thumb">
-                     <Image
-                        src={url}
-                        width={width}
-                        height={height}
-                        alt="pet image"
-                     />
+               {isLoading ? (
+                  <Loader />
+               ) : (
+                  <div className="wrapper">
+                     <div className="thumb">
+                        <Image
+                           src={data[0]?.url}
+                           width={data[0]?.width}
+                           height={data[0]?.height}
+                           alt="pet image"
+                        />
+                     </div>
+                     <LikeButtons />
                   </div>
-                  <LikeButtons />
-               </div>
+               )}
             </div>
          </section>
       </main>

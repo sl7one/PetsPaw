@@ -3,6 +3,7 @@
 import React from 'react';
 import './gallery-grid.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type GalleryType = {
    id: string;
@@ -19,10 +20,11 @@ interface IProps {
 }
 
 export default function GalleryGrid({ galleryList }: IProps) {
-   if (!galleryList.length) return ;
+   if (!galleryList.length) return;
 
    const items = galleryList.map(({ id, image, name }) => (
-      <div
+      <Link
+         href={`/breeds/${id}`}
          key={id}
          className="gallery-list__item"
       >
@@ -33,7 +35,7 @@ export default function GalleryGrid({ galleryList }: IProps) {
             height={image?.height ?? 500}
          />
          <p className="gallery-list__item-text">{name}</p>
-      </div>
+      </Link>
    ));
    return <div className="gallery-list">{items} </div>;
 }

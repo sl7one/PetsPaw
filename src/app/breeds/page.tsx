@@ -12,6 +12,7 @@ import Button from '../components/Button/Button';
 import Icon from '../components/Icon/Icon';
 import GalleryGrid from '../components/GalleryGrid/GalleryGrid';
 import { optionsLimit } from '../utils/utils';
+import Loader from '../components/Loader/Loader';
 
 export type OptionType = {
    label: string;
@@ -25,9 +26,12 @@ export type SelectEventType = {
 };
 
 const Breeds = () => {
-   const { data, isLoading, error } = useFetch(getBreeds);
+   const { data, isLoading, error } = useFetch({
+      api_cb: getBreeds,
+      storageKey: 'breeds',
+   });
 
-   console.log(data)
+   console.log(data);
 
    const optionsBreeds: OptionType[] = useMemo(
       () =>
@@ -37,8 +41,6 @@ const Breeds = () => {
          })),
       [data]
    );
-
-   
 
    const onChange = (e: SelectEventType) => {
       console.log(e);
@@ -95,7 +97,7 @@ const Breeds = () => {
                      />
                   </Button>
                </div>
-               <GalleryGrid galleryList={data}/>
+               {isLoading ? <Loader/> : <GalleryGrid galleryList={data} />}
             </div>
          </section>
       </main>

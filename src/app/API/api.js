@@ -21,6 +21,12 @@ export const getBreeds = async () => {
    return data;
 };
 
+export const getSingleBreed = async (id) => {
+   const { data } = await axios.get(url + `/breeds/${id}`);
+   return data;
+};
+
+
 
 
 
