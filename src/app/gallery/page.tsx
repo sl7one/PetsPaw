@@ -11,6 +11,7 @@ import SearchBar from '../components/SearchBar/SearchBar';
 import { useFetch } from '../hooks/useFeth';
 import { getBreeds } from '../API/api';
 import Icon from '../components/Icon/Icon';
+import Loader from '../components/Loader/Loader';
 
 const Gallery = () => {
    const { data, isLoading, error } = useFetch({
@@ -32,7 +33,7 @@ const Gallery = () => {
             <div className="page__body">
                <BackComponent />
                <FilterForm />
-               <GalleryGrid
+               {isLoading ? <Loader width={80} height={80}/>: <GalleryGrid
                   galleryList={data}
                   render={({ id, image, name }) => (
                      <div
@@ -63,7 +64,7 @@ const Gallery = () => {
                         }
                      </div>
                   )}
-               />
+               />}
             </div>
          </section>
       </main>
