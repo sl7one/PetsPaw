@@ -63,6 +63,12 @@
          transition: opacity var(--transition), transform var(--transition);
       }
 
+      &:hover p {
+         transform: translate(-50%, 10%);
+
+        
+      }
+
       &:hover button {
          opacity: 1;
          transform: scale(1) translate(-50%, -50%);
