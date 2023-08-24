@@ -2,8 +2,6 @@
 
 import React from 'react';
 import './gallery-grid.scss';
-import Image from 'next/image';
-import Link from 'next/link';
 
 type GalleryType = {
    id: string;
@@ -17,28 +15,13 @@ type GalleryType = {
 
 interface IProps {
    galleryList: GalleryType[];
+   render: (params: GalleryType) => React.ReactNode;
 }
 
-export default function GalleryGrid({ galleryList }: IProps) {
+
+export default function GalleryGrid({ galleryList, render }: IProps) {
    if (!galleryList.length) return;
 
-   const items = galleryList.map(({ id, image, name }) => (
-      <Link
-         href={{
-            pathname: `/breeds/${id}`,
-            query: { fakeId: 15 },
-         }}
-         key={id}
-         className="gallery-list__item"
-      >
-         <Image
-            src={image?.url ? image.url : '/default.jpg'}
-            alt={name}
-            width={image?.width ?? 500}
-            height={image?.height ?? 500}
-         />
-         <p className="gallery-list__item-text">{name}</p>
-      </Link>
-   ));
+   const items = galleryList.map(({ id, image, name }) => render({id, image, name}));
    return <div className="gallery-list">{items} </div>;
 }

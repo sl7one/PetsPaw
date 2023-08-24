@@ -9,7 +9,7 @@ interface IProps {
    children: ReactElement;
    className?: string;
    type?: string;
-   onClick: () => void;
+   onClick?: () => void;
 }
 
 export default function Button({

@@ -63,19 +63,18 @@
       fill: var(--orange);
    }
 }
-
-.button.submit{
+.button.submit {
    margin-left: 10px;
    background-color: var(--main-white);
 
-    svg{
+   svg {
       fill: var(--primary);
    }
 
-   &:hover{
+   &:hover {
       background-color: var(--primary);
    }
-   &:hover svg{
+   &:hover svg {
       fill: var(--main-white);
    }
 }

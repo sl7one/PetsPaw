@@ -13,6 +13,8 @@ import Icon from '../components/Icon/Icon';
 import GalleryGrid from '../components/GalleryGrid/GalleryGrid';
 import { optionsLimit } from '../utils/utils';
 import Loader from '../components/Loader/Loader';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export type OptionType = {
    label: string;
@@ -30,7 +32,6 @@ const Breeds = () => {
       api_cb: getBreeds,
       storageKey: 'breeds',
    });
-
 
    const optionsBreeds: OptionType[] = useMemo(
       () =>
@@ -96,7 +97,28 @@ const Breeds = () => {
                      />
                   </Button>
                </div>
-               {isLoading ? <Loader/> : <GalleryGrid galleryList={data} />}
+               {isLoading ? (
+                  <Loader />
+               ) : (
+                  <GalleryGrid
+                     galleryList={data}
+                     render={({id, image, name} ) => (
+                        <Link
+                           href={`/breeds/${id}`}
+                           key={id}
+                           className="gallery-list__item"
+                        >
+                           <Image
+                              src={image?.url ? image.url : '/default.jpg'}
+                              alt={name}
+                              width={image?.width ?? 500}
+                              height={image?.height ?? 500}
+                           />
+                           <p className="gallery-list__item-text">{name}</p>
+                        </Link>
+                     )}
+                  />
+               )}
             </div>
          </section>
       </main>
