@@ -27,6 +27,8 @@ export type SelectEventType = {
 const Breeds = () => {
    const { data, isLoading, error } = useFetch(getBreeds);
 
+   console.log(data)
+
    const optionsBreeds: OptionType[] = useMemo(
       () =>
          data.map(({ name }: { name: string }) => ({
