@@ -24,7 +24,10 @@ export default function GalleryGrid({ galleryList }: IProps) {
 
    const items = galleryList.map(({ id, image, name }) => (
       <Link
-         href={`/breeds/${id}`}
+         href={{
+            pathname: `/breeds/${id}`,
+            query: { fakeId: 15 },
+         }}
          key={id}
          className="gallery-list__item"
       >

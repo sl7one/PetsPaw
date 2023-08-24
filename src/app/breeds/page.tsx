@@ -31,7 +31,6 @@ const Breeds = () => {
       storageKey: 'breeds',
    });
 
-   console.log(data);
 
    const optionsBreeds: OptionType[] = useMemo(
       () =>

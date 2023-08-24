@@ -6,9 +6,11 @@ import LikeLinks from '@/app/components/LikeLinks/LikeLinks';
 import SearchBar from '@/app/components/SearchBar/SearchBar';
 import './breed-page.scss';
 import { useFetch } from '@/app/hooks/useFeth';
-import { getSingleBreed } from '@/app/API/api';
+import { getBreedsImgLimited, getSingleBreed } from '@/app/API/api';
 import { useCallback } from 'react';
 import Loader from '@/app/components/Loader/Loader';
+import PetInfo from '@/app/components/PetInfo/PetInfo';
+import SwiperComponent from '@/app/components/SwiperComponent/SwiperComponent';
 
 type DataType = {
    name: string;
@@ -35,12 +37,7 @@ interface IProps {
 }
 
 const BreedPage = ({ params: { breedId } }: IProps) => {
-   const api_cb = useCallback(() => getSingleBreed(breedId), [breedId]);
-   const { data, isLoading, error }: IState = useFetch({
-      api_cb,
-   });
 
-   console.log(isLoading)
 
    return (
       <main className="breed-page home container">
@@ -54,31 +51,8 @@ const BreedPage = ({ params: { breedId } }: IProps) => {
                <div className="page__header">
                   <BackComponent />
                </div>
-               {isLoading ? (
-                  <Loader width={100} height={100}/>
-               ) : (
-                  <div className="pet-info-block">
-                     <h1>{data?.name}</h1>
-                     <p>{data?.description}</p>
-                     <div className="pet-info-text-block">
-                        <div className="pet-info-text-block__left">
-                           <p>Temperament:</p>
-                           <span>{data?.temperament}</span>
-                        </div>
-                        <div className="pet-info-text-block__right">
-                           <p>
-                              Origin: <span>{data?.origin}</span>
-                           </p>
-                           <p>
-                              Weight: <span>{data?.weight?.metric + ' kgs'}</span>
-                           </p>
-                           <p>
-                              Life span: <span>{data?.life_span + ' years'}</span>
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-               )}
+               <SwiperComponent breedId={breedId}/>
+               <PetInfo breedId={breedId} />
             </div>
          </section>
       </main>

@@ -26,6 +26,11 @@ export const getSingleBreed = async (id) => {
    return data;
 };
 
+export const getBreedsImgLimited = async (id) => {
+   const { data } = await axios.get(url + `/images/search?breed_ids=${id}&limit=5&size=med`);
+   return data;
+};
+
 
 
 
