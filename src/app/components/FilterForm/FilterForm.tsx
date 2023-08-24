@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, {  useMemo } from 'react';
 import './filter-form.scss';
 import SelectComponent from '../SelectComponent/SelectComponent';
 
@@ -12,7 +12,7 @@ import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 
 export default function FilterForm() {
-   const { data, isLoading, error } = useFetch(getBreeds);
+   const { data, isLoading, error } = useFetch({ api_cb: getBreeds });
 
    const optionsBreeds: OptionType[] = useMemo(
       () =>
@@ -30,6 +30,7 @@ export default function FilterForm() {
    const onClickSubmit = () => {
       console.log('submit');
    };
+
    return (
       <form className="filter-form">
          <div className="filter-form__top">
@@ -40,7 +41,7 @@ export default function FilterForm() {
                   id="order"
                   onChange={onChangeOrder}
                   defaulValue={orderOptions[0]}
-                  bgcolor='white'
+                  bgcolor="white"
                   width={290}
                ></SelectComponent>
             </div>
@@ -51,11 +52,9 @@ export default function FilterForm() {
                   id="type"
                   onChange={onChangeOrder}
                   defaulValue={typeOptions[1]}
-                  bgcolor='white'
+                  bgcolor="white"
                   width={290}
                   marginLeft={20}
-
-
                ></SelectComponent>
             </div>
          </div>
@@ -68,7 +67,7 @@ export default function FilterForm() {
                   onChange={onChangeOrder}
                   defaulValue={{ label: 'None', value: 'none' }}
                   isDisabled={isLoading}
-                  bgcolor='white'
+                  bgcolor="white"
                   width={290}
                ></SelectComponent>
             </div>
@@ -79,15 +78,14 @@ export default function FilterForm() {
                   id="limit"
                   onChange={onChangeOrder}
                   defaulValue={optionsLimitPerPage[0]}
-                  bgcolor='white'
+                  bgcolor="white"
                   width={240}
-
                ></SelectComponent>
             </div>
             <Button
                type="submit"
                onClick={onClickSubmit}
-               className='submit'
+               className="submit"
             >
                <Icon
                   name="icon-update"

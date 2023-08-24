@@ -3,6 +3,10 @@
    padding: 10px 20px;
    background-color: rgba(248, 248, 247, 1);
    border-radius: 20px;
+
+   position: relative;
+   z-index: 2;
+   
    &__top,
    &__bottom {
       display: flex;
