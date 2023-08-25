@@ -11,6 +11,10 @@ type GalleryType = {
       width: number;
       height: number;
    };
+   url?:string
+   width?: number;
+   height?: number;
+
 };
 
 interface IProps {
@@ -22,6 +26,6 @@ interface IProps {
 export default function GalleryGrid({ galleryList, render }: IProps) {
    if (!galleryList.length) return;
 
-   const items = galleryList.map(({ id, image, name }) => render({id, image, name}));
+   const items = galleryList.map(({ id, image, name, url, width, height }) => render({id, image, name, url, width, height}));
    return <div className="gallery-list">{items} </div>;
 }

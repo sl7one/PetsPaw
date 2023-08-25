@@ -1,5 +1,5 @@
 'use client';
-import { useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import BackComponent from '../components/BackComponent/BackComponent';
 import LesftSection from '../components/LeftSection/LesftSection';
 import { getBreeds } from '../API/api';
@@ -23,28 +23,48 @@ export type OptionType = {
 
 export type SelectEventType = {
    id: string;
-   label: string;
    value: string;
 };
 
 const Breeds = () => {
-   const { data, isLoading, error } = useFetch({
+   const [filter, setFilter] = useState({
+      order: 'Random',
+      type: 'All',
+      limit: 10,
+      breed: 'None',
+   });
+   const {
+      data: catsData,
+      isLoading: catsIsLoading,
+      error: catsError,
+   } = useFetch({
+      api_cb: useCallback(() => getBreeds(filter), [filter]),
+      storage: false,
+   });
+
+   const {
+      data: optionsData,
+      isLoading: optionsIsLoading,
+      error: optionsError,
+   } = useFetch({
       api_cb: getBreeds,
-      storageKey: 'breeds',
+      storageKey: 'breedsOptionts',
    });
 
    const optionsBreeds: OptionType[] = useMemo(
       () =>
-         data.map(({ name }: { name: string }) => ({
+         optionsData.map(({ name }: { name: string }) => ({
             label: name,
             value: name.toLowerCase(),
          })),
-      [data]
+      [optionsData]
    );
 
-   const onChange = (e: SelectEventType) => {
-      console.log(e);
+   const onChange = ({ id, value }: SelectEventType) => {
+      setFilter((prev) => ({ ...prev, [id]: value }));
    };
+
+   // console.log(data)
 
    return (
       <main className="breeds home container">
@@ -58,19 +78,20 @@ const Breeds = () => {
                <div className="page__header">
                   <BackComponent />
                   <SelectComponent
-                     width={226}
+                     width={101}
                      options={optionsBreeds}
-                     placeholder="All breeds"
-                     isDisabled={isLoading}
+                     isDisabled={optionsIsLoading}
                      onChange={onChange}
                      id="option"
+                     defaulValue={{ label: 'All breeds', value: 'None' }}
                   />
                   <SelectComponent
                      width={101}
                      options={optionsLimit}
-                     placeholder="All breeds"
-                     isDisabled={isLoading}
-                     defaulValue={optionsLimit[0]}
+                     defaulValue={{
+                        label: `Limit: ${filter.limit}`,
+                        value: filter.limit,
+                     }}
                      onChange={onChange}
                      id="limit"
                   />
@@ -78,6 +99,7 @@ const Breeds = () => {
                      height={40}
                      width={40}
                      className="sort"
+                     onClick={() => setFilter((prev) => ({ ...prev, ['order']: 'desc' }))}
                   >
                      <Icon
                         height={22}
@@ -89,6 +111,7 @@ const Breeds = () => {
                      height={40}
                      width={40}
                      className="sort"
+                     onClick={() => setFilter((prev) => ({ ...prev, ['order']: 'asc' }))}
                   >
                      <Icon
                         height={22}
@@ -97,12 +120,12 @@ const Breeds = () => {
                      />
                   </Button>
                </div>
-               {isLoading ? (
+               {catsIsLoading ? (
                   <Loader />
                ) : (
                   <GalleryGrid
-                     galleryList={data}
-                     render={({id, image, name} ) => (
+                     galleryList={catsData}
+                     render={({ id, image, name }) => (
                         <Link
                            href={`/breeds/${id}`}
                            key={id}
@@ -111,8 +134,8 @@ const Breeds = () => {
                            <Image
                               src={image?.url ? image.url : '/default.jpg'}
                               alt={name}
-                              width={image?.width ?? 500}
-                              height={image?.height ?? 500}
+                              width={image?.width && 500}
+                              height={image?.height && 500}
                            />
                            <p className="gallery-list__item-text">{name}</p>
                         </Link>

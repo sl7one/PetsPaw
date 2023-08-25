@@ -1,6 +1,6 @@
 'use client';
 
-import React, {  useMemo } from 'react';
+import React, { useMemo } from 'react';
 import './filter-form.scss';
 import SelectComponent from '../SelectComponent/SelectComponent';
 
@@ -11,25 +11,28 @@ import { getBreeds } from '@/app/API/api';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 
-export default function FilterForm() {
-   const { data, isLoading, error } = useFetch({ api_cb: getBreeds });
+interface IProps {
+   onChange: () => void;
+   onClickSubmit: () => void;
+   defaultValue: {
+      breed: string;
+      limit: number;
+      order: string;
+      type: string;
+   };
+}
+
+export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IProps) {
+   const { data, isLoading, error } = useFetch({ api_cb: getBreeds, storage: false });
 
    const optionsBreeds: OptionType[] = useMemo(
       () =>
-         data.map(({ name }: { name: string }) => ({
+         data.map(({ name, id }: { name: string }) => ({
             label: name,
-            value: name.toLowerCase(),
+            value: id.toLowerCase(),
          })),
       [data]
    );
-
-   const onChangeOrder = () => {
-      console.log('order');
-   };
-
-   const onClickSubmit = () => {
-      console.log('submit');
-   };
 
    return (
       <form className="filter-form">
@@ -39,8 +42,11 @@ export default function FilterForm() {
                <SelectComponent
                   options={orderOptions}
                   id="order"
-                  onChange={onChangeOrder}
-                  defaulValue={orderOptions[0]}
+                  onChange={onChange}
+                  defaulValue={{
+                     label: defaultValue['order'],
+                     value: defaultValue['order'].toLowerCase(),
+                  }}
                   bgcolor="white"
                   width={290}
                ></SelectComponent>
@@ -50,11 +56,13 @@ export default function FilterForm() {
                <SelectComponent
                   options={typeOptions}
                   id="type"
-                  onChange={onChangeOrder}
-                  defaulValue={typeOptions[1]}
+                  onChange={onChange}
+                  defaulValue={{
+                     label: defaultValue['type'],
+                     value: defaultValue['type'].toLowerCase(),
+                  }}
                   bgcolor="white"
                   width={290}
-                  marginLeft={20}
                ></SelectComponent>
             </div>
          </div>
@@ -64,8 +72,11 @@ export default function FilterForm() {
                <SelectComponent
                   options={optionsBreeds}
                   id="breed"
-                  onChange={onChangeOrder}
-                  defaulValue={{ label: 'None', value: 'none' }}
+                  onChange={onChange}
+                  defaulValue={{
+                     label: defaultValue['breed'],
+                     value: defaultValue['breed'].toLowerCase(),
+                  }}
                   isDisabled={isLoading}
                   bgcolor="white"
                   width={290}
@@ -76,8 +87,11 @@ export default function FilterForm() {
                <SelectComponent
                   options={optionsLimitPerPage}
                   id="limit"
-                  onChange={onChangeOrder}
-                  defaulValue={optionsLimitPerPage[0]}
+                  onChange={onChange}
+                  defaulValue={{
+                     label: `${defaultValue['limit']} items per page`,
+                     value: defaultValue['limit'],
+                  }}
                   bgcolor="white"
                   width={240}
                ></SelectComponent>
