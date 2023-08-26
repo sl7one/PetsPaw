@@ -54,7 +54,7 @@ export const useFetch = ({ api_cb, storageKey, storage = true, dependency }: IPr
 
          getData();
       },
-       [api_cb]
+       [api_cb, dependency]
    );
 
    return data;

@@ -10,7 +10,26 @@ export const getRandom = async () => {
 };
 
 export const getVotes = async () => {
-   const { data } = await axios.get('/votes?limit=10&order=DESC');
+   const { data } = await axios.get('/votes?order=desc');
+   return data;
+};
+
+export const postVotes = async ({ value, image_id }) => {
+   const { data } = await axios.post('/votes', {
+      image_id,
+      sub_id: 'my-user',
+      value,
+   });
+   return data;
+};
+
+export const addToFavorites = async (id) => {
+   const { data } = await axios.post(`/favourites`, { id, sub_id: 'my-user' });
+   return data;
+};
+
+export const deleteFromFavorites = async (image_id) => {
+   const { data } = await axios.delete(`/favourites/${image_id}`);
    return data;
 };
 

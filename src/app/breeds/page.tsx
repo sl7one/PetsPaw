@@ -64,7 +64,6 @@ const Breeds = () => {
       setFilter((prev) => ({ ...prev, [id]: value }));
    };
 
-   // console.log(data)
 
    return (
       <main className="breeds home container">
