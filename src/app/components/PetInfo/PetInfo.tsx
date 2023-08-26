@@ -1,7 +1,10 @@
+'use client';
+
 import { getSingleBreed } from '@/app/API/api';
 import { useFetch } from '@/app/hooks/useFeth';
 import React, { useCallback } from 'react';
 import Loader from '../Loader/Loader';
+import './pet-info.scss'
 
 type DataType = {
    name: string;
@@ -26,7 +29,6 @@ export default function PetInfo({ breedId }: { breedId: string }) {
       api_cb: useCallback(() => getSingleBreed(breedId), [breedId]),
    });
 
-
    if (isLoading) {
       return (
          <Loader
@@ -37,15 +39,15 @@ export default function PetInfo({ breedId }: { breedId: string }) {
    }
 
    return (
-      <div className="pet-info-block">
+      <div className="pet-info__block">
          <h1>{data?.name}</h1>
          <p>{data?.description}</p>
-         <div className="pet-info-text-block">
-            <div className="pet-info-text-block__left">
+         <div className="pet-info__text-block">
+            <div className="pet-info__text-block left">
                <p>Temperament:</p>
                <span>{data?.temperament}</span>
             </div>
-            <div className="pet-info-text-block__right">
+            <div className="pet-info__text-block right">
                <p>
                   Origin: <span>{data?.origin}</span>
                </p>

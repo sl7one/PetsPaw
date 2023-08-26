@@ -48,7 +48,6 @@ export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IP
                      value: defaultValue['order'].toLowerCase(),
                   }}
                   bgcolor="white"
-                  width={290}
                ></SelectComponent>
             </div>
             <div className="filter-form__item">
@@ -62,7 +61,6 @@ export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IP
                      value: defaultValue['type'].toLowerCase(),
                   }}
                   bgcolor="white"
-                  width={290}
                ></SelectComponent>
             </div>
          </div>
@@ -79,7 +77,6 @@ export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IP
                   }}
                   isDisabled={isLoading}
                   bgcolor="white"
-                  width={290}
                ></SelectComponent>
             </div>
             <div className="filter-form__item">
@@ -93,7 +90,6 @@ export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IP
                      value: defaultValue['limit'],
                   }}
                   bgcolor="white"
-                  width={240}
                ></SelectComponent>
             </div>
             <Button

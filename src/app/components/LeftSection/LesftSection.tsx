@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import React from 'react';
 import Navigation from '../Navigation/Navigation';
@@ -5,7 +7,7 @@ import Navigation from '../Navigation/Navigation';
 export default function LesftSection() {
    return (
       <section className="home__left ">
-         <div className='home__left-sticky'>
+         <div className="home__left-sticky">
             <Image
                src="/logo.svg"
                alt="logo"

@@ -15,8 +15,10 @@ import Loader from '../components/Loader/Loader';
 import { useCallback, useRef, useState } from 'react';
 import './gallery.scss';
 import Modal from '../components/Modal/Modal';
+import useMedia from '../hooks/useMedia';
 
 const Gallery = () => {
+   const { isMobile } = useMedia();
    const modalRef = useRef(null);
    const [form, setForm] = useState({
       breed: 'None',
@@ -50,7 +52,7 @@ const Gallery = () => {
 
    return (
       <main className="gallery home container">
-         <LesftSection />
+         {!isMobile && <LesftSection />}
          <section className="home__right ">
             <div className="page__header">
                <SearchBar />

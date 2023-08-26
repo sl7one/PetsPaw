@@ -15,6 +15,7 @@ import { optionsLimit } from '../utils/utils';
 import Loader from '../components/Loader/Loader';
 import Link from 'next/link';
 import Image from 'next/image';
+import useMedia from '../hooks/useMedia';
 
 export type OptionType = {
    label: string;
@@ -27,6 +28,7 @@ export type SelectEventType = {
 };
 
 const Breeds = () => {
+   const { isMobile } = useMedia();
    const [filter, setFilter] = useState({
       order: 'Random',
       type: 'All',
@@ -64,10 +66,9 @@ const Breeds = () => {
       setFilter((prev) => ({ ...prev, [id]: value }));
    };
 
-
    return (
       <main className="breeds home container">
-         <LesftSection />
+         {!isMobile && <LesftSection />}
          <section className="home__right">
             <div className="page__header">
                <SearchBar />
@@ -76,48 +77,56 @@ const Breeds = () => {
             <div className="page__body">
                <div className="page__header">
                   <BackComponent />
-                  <SelectComponent
-                     width={101}
-                     options={optionsBreeds}
-                     isDisabled={optionsIsLoading}
-                     onChange={onChange}
-                     id="option"
-                     defaulValue={{ label: 'All breeds', value: 'None' }}
-                  />
-                  <SelectComponent
-                     width={101}
-                     options={optionsLimit}
-                     defaulValue={{
-                        label: `Limit: ${filter.limit}`,
-                        value: filter.limit,
-                     }}
-                     onChange={onChange}
-                     id="limit"
-                  />
-                  <Button
-                     height={40}
-                     width={40}
-                     className="sort"
-                     onClick={() => setFilter((prev) => ({ ...prev, ['order']: 'desc' }))}
-                  >
-                     <Icon
-                        height={22}
-                        width={18.5}
-                        name="icon-desc"
+                  <div className="breeds__header-wrapper">
+                     <SelectComponent
+                        width={101}
+                        options={optionsBreeds}
+                        isDisabled={optionsIsLoading}
+                        onChange={onChange}
+                        id="option"
+                        defaulValue={{ label: 'All breeds', value: 'None' }}
                      />
-                  </Button>
-                  <Button
-                     height={40}
-                     width={40}
-                     className="sort"
-                     onClick={() => setFilter((prev) => ({ ...prev, ['order']: 'asc' }))}
-                  >
-                     <Icon
-                        height={22}
-                        width={18.5}
-                        name="icon-asc"
-                     />
-                  </Button>
+                     <div className='breeds__nested-header-wrapper'>
+                        <SelectComponent
+                           width={101}
+                           options={optionsLimit}
+                           defaulValue={{
+                              label: `Limit: ${filter.limit}`,
+                              value: filter.limit,
+                           }}
+                           onChange={onChange}
+                           id="limit"
+                        />
+                        <Button
+                           height={40}
+                           width={40}
+                           className="sort"
+                           onClick={() =>
+                              setFilter((prev) => ({ ...prev, ['order']: 'desc' }))
+                           }
+                        >
+                           <Icon
+                              height={22}
+                              width={18.5}
+                              name="icon-desc"
+                           />
+                        </Button>
+                        <Button
+                           height={40}
+                           width={40}
+                           className="sort"
+                           onClick={() =>
+                              setFilter((prev) => ({ ...prev, ['order']: 'asc' }))
+                           }
+                        >
+                           <Icon
+                              height={22}
+                              width={18.5}
+                              name="icon-asc"
+                           />
+                        </Button>
+                     </div>
+                  </div>
                </div>
                {catsIsLoading ? (
                   <Loader />

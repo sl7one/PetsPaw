@@ -1,7 +1,10 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import './main-button.scss';
+import useMedia from '@/app/hooks/useMedia';
 
 interface IProps {
    linkPath: string;
@@ -22,19 +25,22 @@ export default function MainButton({
    width,
    height,
 }: IProps) {
+   const { isMobile } = useMedia();
    return (
       <Link
          href={linkPath}
          className={!isActive ? `main-button` : 'main-button active'}
       >
-         <div className={`thumb ${className}`}>
-            <Image
-               src={linkImage}
-               alt={linkName}
-               width={width}
-               height={height}
-            />
-         </div>
+         {!isMobile && (
+            <div className={`thumb ${className}`}>
+               <Image
+                  src={linkImage}
+                  alt={linkName}
+                  width={width}
+                  height={height}
+               />
+            </div>
+         )}
          <span>{linkName}</span>
       </Link>
    );

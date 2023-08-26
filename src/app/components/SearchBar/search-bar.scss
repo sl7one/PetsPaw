@@ -3,6 +3,12 @@
    align-items: center;
    justify-content: space-between;
    position: relative;
+   width: 100%;
+   order: 2;
+
+   @media screen and (min-width: '768px') {
+      order: 'unset';
+   }
 
    input {
       display: block;
@@ -13,8 +19,7 @@
       border: 2px solid var(--main-white);
 
       transition: border var(--transition);
-
-      width: 470px;
+      flex: 1;
 
       &:hover {
          border: 2px solid var(--primary-light);
@@ -38,7 +43,7 @@
       }
    }
 
-   button{
+   button {
       position: absolute;
       top: 50%;
       right: 10px;

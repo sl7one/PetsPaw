@@ -20,6 +20,7 @@ import Image from 'next/image';
 import Loader from '../components/Loader/Loader';
 import VotingList from '../components/VotingList/VotingList';
 import { useEffect, useState } from 'react';
+import useMedia from '../hooks/useMedia';
 // type RandomItemType = {
 //    id: string;
 //    url: string;
@@ -33,12 +34,11 @@ import { useEffect, useState } from 'react';
 //    isLoading: boolean;
 // }
 
-
-
 const Voting = () => {
    const [vote, setVote] = useState(null);
    const [dataVotes, setDataVotes] = useState(null);
-   const [isAddedToFavorites, setIsAddedToFavorites] = useState(false)
+   const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
+   const { isMobile } = useMedia();
 
    const {
       data: dataCats = null,
@@ -73,33 +73,24 @@ const Voting = () => {
       }
    };
 
-   console.log(dataCats)
-
    const onClickFavorite = async () => {
-      const favoriteButton = document.querySelector('.button.pink');
-
       if (!isAddedToFavorites) {
-
          // console.log('need to del')
          // await deleteFromFavorites(dataCats[0].id);
          // setVote({ value: -1000, image_id: dataCats[0].id });
-         setIsAddedToFavorites(true)
+         setIsAddedToFavorites(true);
       } else {
-
          // await addToFavorites(dataCats[0].id);
          // setVote({ value, image_id: dataCats[0].id });
-         setIsAddedToFavorites(false)
-
+         setIsAddedToFavorites(false);
       }
-
-
    };
 
    if (!dataCats || !dataVotes) return;
 
    return (
-      <main className="home voting container">
-         <LesftSection />
+      <main className="voting home container">
+         {!isMobile && <LesftSection />}
          <section className="home__right">
             <div className="page__header">
                <SearchBar />
@@ -123,7 +114,7 @@ const Voting = () => {
                         onClickVote={onClickVote}
                         onClickFavorite={onClickFavorite}
                         isDisabled={dataVotes.isLoading}
-                        isAddedToFavorites = {isAddedToFavorites}
+                        isAddedToFavorites={isAddedToFavorites}
                      />
                   </div>
                )}

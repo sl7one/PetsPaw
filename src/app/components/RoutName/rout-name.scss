@@ -17,3 +17,13 @@
 
    text-transform: uppercase;
 }
+
+.rout-name.primary-light {
+   background-color: var(--primary-light);
+   color: var(--primary);
+}
+
+.rout-name.primary {
+   background-color: var(--primary);
+   // min-width: 90px;
+}
