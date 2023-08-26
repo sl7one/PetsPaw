@@ -1,0 +1,72 @@
+.drop-zone {
+   &__image-thumb {
+      width: 560px;
+      height: 280px;
+      border-radius: 10px;
+      overflow: hidden;
+
+      img {
+         object-fit: cover;
+         object-position: center;
+      }
+   }
+
+   &__box {
+      margin-top: 40px;
+
+      height: 370px;
+      background-color: var(--main-white);
+      border: 2px dashed var(--primary-light);
+      border-radius: 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background-image: url('/default.jpg');
+      background-position: center;
+      background-repeat: no-repeat;
+
+      p {
+         font-size: 20px;
+         font-weight: 400;
+         line-height: calc(30 / 20);
+         span {
+            font-weight: 500;
+            margin: 5px;
+         }
+      }
+   }
+
+   &__box.failed{
+      background-color: var(--primary-light);
+      border: 2px dashed var(--primary);
+   }
+
+   &__file {
+      margin-top: 20px;
+      text-align: center;
+      color: var(--gray-text);
+      line-height: calc(30 / 20);
+   }
+
+  
+
+   &__message {
+      margin-top: 20px;
+      padding: 20px;
+      display: flex;
+      background-color: var(--main-white);
+
+      font-size: 16px;
+      font-weight: 400;
+      line-height: calc(24 / 16);
+      border-radius: 10px;
+      color: var(--gray-text);
+
+      svg {
+         margin-right: 10px;
+         cursor: auto;
+      }
+   }
+}

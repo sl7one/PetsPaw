@@ -53,3 +53,8 @@ export const getCatsGallery = async (options) => {
    );
    return data;
 };
+
+export const postCatImage = async (formData) => {
+   const { data } = await axios.post(`/images/upload`, formData);
+   return data;
+};

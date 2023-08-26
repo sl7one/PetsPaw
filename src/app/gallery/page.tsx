@@ -12,9 +12,12 @@ import { useFetch } from '../hooks/useFeth';
 import { getCatsGallery } from '../API/api';
 import Icon from '../components/Icon/Icon';
 import Loader from '../components/Loader/Loader';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
+import './gallery.scss';
+import Modal from '../components/Modal/Modal';
 
 const Gallery = () => {
+   const modalRef = useRef(null);
    const [form, setForm] = useState({
       breed: 'None',
       limit: 5,
@@ -38,8 +41,15 @@ const Gallery = () => {
       e.preventDefault();
       setTrigger(Date.now());
    };
+
+   const onClickUpload = () => {
+      if (modalRef.current) {
+         modalRef.current.classList.add('opened');
+      }
+   };
+
    return (
-      <main className="home container">
+      <main className="gallery home container">
          <LesftSection />
          <section className="home__right ">
             <div className="page__header">
@@ -47,7 +57,23 @@ const Gallery = () => {
                <LikeLinks />
             </div>
             <div className="page__body">
-               <BackComponent />
+               <div className="gallery__body-header">
+                  <BackComponent />
+                  <Button
+                     width={143}
+                     className="upload"
+                     onClick={onClickUpload}
+                  >
+                     <span>
+                        <Icon
+                           name="icon-upload"
+                           width={16}
+                           height={16}
+                        />{' '}
+                        upload
+                     </span>
+                  </Button>
+               </div>
                <FilterForm
                   onChange={onChange}
                   onClickSubmit={onClickSubmit}
@@ -94,6 +120,7 @@ const Gallery = () => {
                )}
             </div>
          </section>
+         <Modal ref={modalRef} />
       </main>
    );
 };

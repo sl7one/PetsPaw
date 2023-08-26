@@ -9,6 +9,7 @@ interface IProps {
    children: ReactElement;
    className?: string;
    type?: string;
+   isDisabled?: boolean;
    onClick?: () => void;
 }
 
@@ -18,16 +19,16 @@ export default function Button({
    children,
    className,
    type = 'button',
+   isDisabled = false,
    onClick,
 }: IProps) {
-
-
    return (
       <button
          className={className ? `button ${className}` : 'button'}
          style={{ width: `${width}px`, height: `${height}px` }}
          onClick={onClick}
          type={type}
+         disabled={isDisabled}
       >
          {children}
       </button>
