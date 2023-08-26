@@ -1,4 +1,4 @@
-import {  OptionType, SelectEventType } from '@/app/breeds/page';
+import { OptionType, SelectEventType } from '@/app/breeds/page';
 import React from 'react';
 import Select from 'react-select';
 
@@ -46,7 +46,7 @@ const selectStyles = (width: number, bgcolor: string) => ({
       },
    }),
    indicatorSeparator: (base: any, state: any) => ({ ...base, display: 'none' }),
-
+   container: (base: any) => ({ ...base, flex: 1 }),
 });
 
 interface IProp {
@@ -62,9 +62,9 @@ interface IProp {
 
 export default function SelectComponent({
    width = 200,
-   bgcolor='#f8f8f7',
+   bgcolor = '#f8f8f7',
    options,
-   placeholder="Select ...",
+   placeholder = 'Select ...',
    isDisabled = false,
    defaulValue,
    id,
@@ -77,7 +77,7 @@ export default function SelectComponent({
          isDisabled={isDisabled}
          styles={selectStyles(width, bgcolor)}
          defaultValue={defaulValue}
-         onChange={(e:any) => onChange({ id, ...e })}
+         onChange={(e: any) => onChange({ id, ...e })}
       />
    );
 }
