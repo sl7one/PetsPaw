@@ -6,6 +6,7 @@ import 'swiper/scss/pagination';
 import Loader from '../Loader/Loader';
 import Image from 'next/image';
 import './swiper-component.scss';
+import useMedia from '@/app/hooks/useMedia';
 
 type ItemType = {
    id: string;
@@ -21,6 +22,8 @@ export interface IState {
 }
 
 export default function SwiperComponent({ data, isLoading }: IState) {
+   const { isMobile } = useMedia();
+
    if (isLoading) {
       return (
          <Loader
@@ -53,7 +56,7 @@ export default function SwiperComponent({ data, isLoading }: IState) {
          modules={[Pagination]}
          pagination={{ clickable: true }}
          style={{
-            width: '85vw',
+            width: isMobile ? '85vw' : "40vw",
             maxHeight: '40vh',
             marginTop: '20px',
             borderRadius: '20px',
