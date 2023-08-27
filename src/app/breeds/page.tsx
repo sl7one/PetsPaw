@@ -16,6 +16,7 @@ import Loader from '../components/Loader/Loader';
 import Link from 'next/link';
 import Image from 'next/image';
 import useMedia from '../hooks/useMedia';
+import ButtonBurger from '../components/ButtonBurrger/ButtonBurger';
 
 export type OptionType = {
    label: string;
@@ -28,7 +29,7 @@ export type SelectEventType = {
 };
 
 const Breeds = () => {
-   const { isMobile } = useMedia();
+   const { isMobile, isTablet } = useMedia();
    const [filter, setFilter] = useState({
       order: 'Random',
       type: 'All',
@@ -68,9 +69,10 @@ const Breeds = () => {
 
    return (
       <main className="breeds home container">
-         {!isMobile && <LesftSection />}
+         {!isMobile && !isTablet && <LesftSection />}
          <section className="home__right">
             <div className="page__header">
+               <ButtonBurger />
                <SearchBar />
                <LikeLinks />
             </div>
@@ -86,7 +88,7 @@ const Breeds = () => {
                         id="option"
                         defaulValue={{ label: 'All breeds', value: 'None' }}
                      />
-                     <div className='breeds__nested-header-wrapper'>
+                     <div className="breeds__nested-header-wrapper">
                         <SelectComponent
                            width={101}
                            options={optionsLimit}

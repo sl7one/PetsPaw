@@ -8,6 +8,7 @@ import './breed-page.scss';
 import PetInfo from '@/app/components/PetInfo/PetInfo';
 import SwiperComponent from '@/app/components/SwiperComponent/SwiperComponent';
 import useMedia from '@/app/hooks/useMedia';
+import ButtonBurger from '@/app/components/ButtonBurrger/ButtonBurger';
 
 type DataType = {
    name: string;
@@ -34,13 +35,14 @@ interface IProps {
 }
 
 const BreedPage = ({ params: { breedId } }: IProps) => {
-   const { isMobile } = useMedia();
+   const { isMobile , isTablet} = useMedia();
 
    return (
       <main className="breed-page home container">
-         {!isMobile && <LesftSection />}
+         {!isMobile && !isTablet && <LesftSection />}
          <section className="home__right">
             <div className="page__header">
+               <ButtonBurger/>
                <SearchBar />
                <LikeLinks />
             </div>

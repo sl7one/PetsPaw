@@ -5,12 +5,13 @@ import LesftSection from './components/LeftSection/LesftSection';
 import useMedia from './hooks/useMedia';
 
 const Home = () => {
-   const { isMobile } = useMedia();
+   const { isMobile, isTablet } = useMedia();
+   console.log(isTablet);
 
    return (
       <main className="home container">
          <LesftSection />
-         {!isMobile && (
+         {!isMobile && !isTablet && (
             <section className="home__right">
                <div className="home__right-thumb">
                   <Image

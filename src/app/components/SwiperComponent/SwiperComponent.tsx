@@ -61,8 +61,8 @@ export default function SwiperComponent({ breedId }: { breedId: string }) {
          modules={[Pagination]}
          pagination={{ clickable: true }}
          style={{
-            width: '100%',
-            maxHeight: "260px",
+            width: '85vw',
+            maxHeight: "40vh",
             marginTop: '20px',
             borderRadius: '20px',
          }}

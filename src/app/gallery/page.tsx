@@ -16,9 +16,10 @@ import { useCallback, useRef, useState } from 'react';
 import './gallery.scss';
 import Modal from '../components/Modal/Modal';
 import useMedia from '../hooks/useMedia';
+import ButtonBurger from '../components/ButtonBurrger/ButtonBurger';
 
 const Gallery = () => {
-   const { isMobile } = useMedia();
+   const { isMobile, isTablet } = useMedia();
    const modalRef = useRef(null);
    const [form, setForm] = useState({
       breed: 'None',
@@ -52,9 +53,10 @@ const Gallery = () => {
 
    return (
       <main className="gallery home container">
-         {!isMobile && <LesftSection />}
+         {!isMobile && !isTablet && <LesftSection />}
          <section className="home__right ">
             <div className="page__header">
+               <ButtonBurger/>
                <SearchBar />
                <LikeLinks />
             </div>

@@ -21,6 +21,7 @@ import Loader from '../components/Loader/Loader';
 import VotingList from '../components/VotingList/VotingList';
 import { useEffect, useState } from 'react';
 import useMedia from '../hooks/useMedia';
+import ButtonBurger from '../components/ButtonBurrger/ButtonBurger';
 // type RandomItemType = {
 //    id: string;
 //    url: string;
@@ -35,10 +36,11 @@ import useMedia from '../hooks/useMedia';
 // }
 
 const Voting = () => {
+   const { isMobile, isTablet } = useMedia();
+
    const [vote, setVote] = useState(null);
    const [dataVotes, setDataVotes] = useState(null);
    const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
-   const { isMobile } = useMedia();
 
    const {
       data: dataCats = null,
@@ -90,9 +92,10 @@ const Voting = () => {
 
    return (
       <main className="voting home container">
-         {!isMobile && <LesftSection />}
+         {!isMobile && !isTablet && <LesftSection />}
          <section className="home__right">
             <div className="page__header">
+               <ButtonBurger/>
                <SearchBar />
                <LikeLinks />
             </div>

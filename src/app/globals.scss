@@ -117,14 +117,13 @@ img {
 }
 
 .page__header {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   gap: 10px;
+   display: grid;
+   grid-template-areas:
+      'button likes'
+      'form form';
+      gap: 10px;
 
-   flex-direction: column;
-
-   @media screen and (min-width: '767px') {
+   @media screen and (min-width: '1440px') {
       flex-direction: unset;
    }
 }

@@ -6,6 +6,7 @@
    width: 100%;
    order: 2;
 
+   grid-area: form;
    @media screen and (min-width: '768px') {
       order: 'unset';
    }

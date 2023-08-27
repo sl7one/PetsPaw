@@ -26,7 +26,8 @@
 }
 
 .page-header-wrapper {
-   width: 100%;
+   justify-self: flex-end;
+   
    display: flex;
    justify-content: space-between;
 
