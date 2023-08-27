@@ -4,6 +4,17 @@
       z-index: 2;
    }
 
+   &__body-header {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      @media screen and (min-width: '1440px') {
+         flex-direction: row;
+         
+      }
+   }
+
    .sort {
       background-color: var(--main-bg);
       border: 2px solid transparent;
@@ -35,16 +46,12 @@
       gap: 10px;
       width: 100%;
       @media screen and (min-width: '1440px') {
-         display: block;
+         flex-direction: row;
       }
    }
 
    &__nested-header-wrapper {
       display: flex;
-      width: 100%;
       gap: 10px;
-      @media screen and (min-width: '1440px') {
-         display: block;
-      }
    }
 }

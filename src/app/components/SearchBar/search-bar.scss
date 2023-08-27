@@ -4,11 +4,10 @@
    justify-content: space-between;
    position: relative;
    width: 100%;
-   order: 2;
 
    grid-area: form;
-   @media screen and (min-width: '768px') {
-      order: 'unset';
+   @media screen and (min-width: '1440px') {
+      order: 1;
    }
 
    input {

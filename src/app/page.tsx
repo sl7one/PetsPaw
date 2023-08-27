@@ -6,7 +6,6 @@ import useMedia from './hooks/useMedia';
 
 const Home = () => {
    const { isMobile, isTablet } = useMedia();
-   console.log(isTablet);
 
    return (
       <main className="home container">

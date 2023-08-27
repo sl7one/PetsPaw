@@ -121,10 +121,10 @@ img {
    grid-template-areas:
       'button likes'
       'form form';
-      gap: 10px;
+   gap: 10px;
 
    @media screen and (min-width: '1440px') {
-      flex-direction: unset;
+      display: flex;
    }
 }
 

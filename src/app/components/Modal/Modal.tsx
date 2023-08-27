@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import React, { forwardRef } from 'react';
 import './modal.scss';
 import DropZone from '../DropZone/DropZone';
@@ -32,13 +31,22 @@ const Modal = forwardRef((_, ref) => {
             <h2 className="modal__header">Upload a .jpg or .png Cat Image</h2>
             <p className="modal__text">
                Any uploads must comply with the upload{' '}
-               {<Link href="https://thecatapi.com/privacy" target='_blank'>upload guidelines</Link>} or
-               face deletion.
+               {
+                  <Link
+                     href="https://thecatapi.com/privacy"
+                     target="_blank"
+                  >
+                     upload guidelines
+                  </Link>
+               }{' '}
+               or face deletion.
             </p>
             <DropZone />
          </div>
       </div>
    );
 });
+
+Modal.displayName = 'Modal';
 
 export default Modal;

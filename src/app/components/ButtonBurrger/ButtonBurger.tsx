@@ -1,12 +1,15 @@
 import useMedia from '@/app/hooks/useMedia';
-import React from 'react';
+import React, { useRef } from 'react';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
+import ModalBurger from '../ModalBurger/ModalBurger';
 
 export default function ButtonBurger() {
+   const ref = useRef(null);
    const { isDesktop } = useMedia();
+
    const onClick = () => {
-      console.log('modal');
+        ref.current.classList.add('opened');
    };
    return (
       <>
@@ -24,6 +27,7 @@ export default function ButtonBurger() {
                />
             </Button>
          )}
+         <ModalBurger ref={ref} />
       </>
    );
 }

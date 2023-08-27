@@ -77,7 +77,7 @@ const Breeds = () => {
                <LikeLinks />
             </div>
             <div className="page__body">
-               <div className="page__header">
+               <div className="breeds__body-header">
                   <BackComponent />
                   <div className="breeds__header-wrapper">
                      <SelectComponent
