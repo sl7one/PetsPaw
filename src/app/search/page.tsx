@@ -1,8 +1,8 @@
 'use client';
-import { useCallback, useMemo, useState } from 'react';
+
 import BackComponent from '../components/BackComponent/BackComponent';
 import LesftSection from '../components/LeftSection/LesftSection';
-import {  getVotes } from '../API/api';
+import { getVotes } from '../API/api';
 import { useFetch } from '../hooks/useFeth';
 import SearchBar from '../components/SearchBar/SearchBar';
 import LikeLinks from '../components/LikeLinks/LikeLinks';
@@ -12,6 +12,7 @@ import Image from 'next/image';
 import useMedia from '../hooks/useMedia';
 import ButtonBurger from '../components/ButtonBurrger/ButtonBurger';
 import '../likes/likes.scss';
+import { useSearchParams } from 'next/navigation';
 
 export type OptionType = {
    label: string;
@@ -23,8 +24,11 @@ export type SelectEventType = {
    value: string;
 };
 
-const Breeds = () => {
-   const { isMobile, isTablet } = useMedia();
+const Search = () => {
+   const searchParams = useSearchParams();
+   console.log(searchParams.get('q'));
+
+   const { isMobile, isTablet }= useMedia();
 
    const {
       data: catsData,
@@ -39,7 +43,6 @@ const Breeds = () => {
 
    const items = catsData.filter(({ value }) => value === 1);
 
-   console.log(items);
    return (
       <main className="search home container">
          {!isMobile && !isTablet && <LesftSection />}
@@ -66,7 +69,7 @@ const Breeds = () => {
                         >
                            <Image
                               src={image?.url ? image.url : '/default.jpg'}
-                              alt={"cat picture"}
+                              alt={'cat picture'}
                               width={image?.width ? image.width : 500}
                               height={image?.height ? image.height : 500}
                            />
@@ -80,4 +83,4 @@ const Breeds = () => {
    );
 };
 
-export default Breeds;
+export default Search;

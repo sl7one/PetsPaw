@@ -23,7 +23,7 @@ export type SelectEventType = {
    value: string;
 };
 
-const Breeds = () => {
+const Likes = () => {
    const { isMobile, isTablet } = useMedia();
 
    const {
@@ -80,4 +80,4 @@ const Breeds = () => {
    );
 };
 
-export default Breeds;
+export default Likes;
