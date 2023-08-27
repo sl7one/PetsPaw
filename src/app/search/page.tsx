@@ -2,7 +2,7 @@
 
 import BackComponent from '../components/BackComponent/BackComponent';
 import LesftSection from '../components/LeftSection/LesftSection';
-import { getVotes } from '../API/api';
+import { getBreeds } from '../API/api';
 import { useFetch } from '../hooks/useFeth';
 import SearchBar from '../components/SearchBar/SearchBar';
 import LikeLinks from '../components/LikeLinks/LikeLinks';
@@ -13,35 +13,35 @@ import useMedia from '../hooks/useMedia';
 import ButtonBurger from '../components/ButtonBurrger/ButtonBurger';
 import '../likes/likes.scss';
 import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
-export type OptionType = {
-   label: string;
-   value: string | number;
-};
-
-export type SelectEventType = {
-   id: string;
-   value: string;
-};
 
 const Search = () => {
    const searchParams = useSearchParams();
-   console.log(searchParams.get('q'));
+   const q = searchParams.get('q');
+   const { isMobile, isTablet } = useMedia();
 
-   const { isMobile, isTablet }= useMedia();
+   const [value, setValue] = useState(q);
 
    const {
       data: catsData,
       isLoading: catsIsLoading,
       error: catsError,
    } = useFetch({
-      api_cb: getVotes,
-      storage: false,
+      api_cb: getBreeds,
+      storage: true,
    });
 
-   if (!catsData) return;
+   const onChange = (value: string) => {
+      setValue(value);
+   };
 
-   const items = catsData.filter(({ value }) => value === 1);
+
+   if (!catsData.length) return;
+
+   const items = catsData.filter(({ name }) =>
+      name.toLowerCase().includes(value?.toLowerCase())
+   );
 
    return (
       <main className="search home container">
@@ -49,7 +49,11 @@ const Search = () => {
          <section className="home__right">
             <div className="page__header">
                <ButtonBurger />
-               <SearchBar />
+               <SearchBar
+                  value={value}
+                  setValue={setValue}
+                  onChange={onChange}
+               />
                <LikeLinks />
             </div>
             <div className="page__body">
@@ -69,10 +73,11 @@ const Search = () => {
                         >
                            <Image
                               src={image?.url ? image.url : '/default.jpg'}
-                              alt={'cat picture'}
+                              alt={name}
                               width={image?.width ? image.width : 500}
                               height={image?.height ? image.height : 500}
                            />
+                           <p>{name}</p>
                         </div>
                      )}
                   />

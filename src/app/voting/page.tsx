@@ -19,7 +19,7 @@ import { useFetch } from '../hooks/useFeth';
 import Image from 'next/image';
 import Loader from '../components/Loader/Loader';
 import VotingList from '../components/VotingList/VotingList';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useMedia from '../hooks/useMedia';
 import ButtonBurger from '../components/ButtonBurrger/ButtonBurger';
 // type RandomItemType = {
@@ -41,6 +41,7 @@ const Voting = () => {
    const [vote, setVote] = useState(null);
    const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
    const [favoriteId, setFavoriteId] = useState(0);
+   const [value, setValue] = useState('');
 
    const {
       data: dataCats = null,
@@ -59,21 +60,6 @@ const Voting = () => {
       api_cb: getVotes,
       dependency: vote,
    });
-
-   // useEffect(() => {
-   //    setDataVotes((prev) => ({ ...prev, isLoadingVotes: true }));
-   //    const getData = async () => {
-   //       try {
-   //          const data = await getVotes();
-   //          setDataVotes((prev) => ({ ...prev, dataVotes: data }));
-   //       } catch (error) {
-   //          setDataVotes((prev) => ({ ...prev, errorVotes: error.message }));
-   //       } finally {
-   //          setDataVotes((prev) => ({ ...prev, isLoadingVotes: false }));
-   //       }
-   //    };
-   //    getData();
-   // }, [vote]);
 
    const onClickVote = async (value: number) => {
       try {
@@ -95,6 +81,11 @@ const Voting = () => {
       }
    };
 
+   const onChange = useCallback((value: string) => {
+      setValue(value);
+   }, []);
+
+
    if (!dataCats || !dataVotes) return;
 
    return (
@@ -103,7 +94,10 @@ const Voting = () => {
          <section className="home__right">
             <div className="page__header">
                <ButtonBurger />
-               <SearchBar />
+               <SearchBar
+                  onChange={onChange}
+                  value={value}
+               />
                <LikeLinks />
             </div>
             <div className="page__body">

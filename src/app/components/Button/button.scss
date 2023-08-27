@@ -15,9 +15,7 @@
       transition: fill var(--transition);
    }
 
-   // &:hover {
-   //    background-color: var(--primary);
-   // }
+
 
    &:hover svg {
       fill: var(--main-white);
@@ -63,25 +61,7 @@
       fill: var(--orange);
    }
 }
-.button.submit {
-   margin-left: 10px;
-   background-color: var(--main-white);
-   width: 100% !important;
 
-   @media screen and (min-width: '768px') {
-      max-width: 40px !important;
-   }
-   svg {
-      fill: var(--primary);
-   }
-
-   &:hover {
-      background-color: var(--primary);
-   }
-   &:hover svg {
-      fill: var(--main-white);
-   }
-}
 
 .button.upload {
    width: 100% !important;
