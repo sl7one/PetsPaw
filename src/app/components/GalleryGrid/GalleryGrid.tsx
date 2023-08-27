@@ -11,10 +11,9 @@ type GalleryType = {
       width: number;
       height: number;
    };
-   url?:string
+   url?: string;
    width?: number;
    height?: number;
-
 };
 
 interface IProps {
@@ -22,10 +21,12 @@ interface IProps {
    render: (params: GalleryType) => React.ReactNode;
 }
 
-
 export default function GalleryGrid({ galleryList, render }: IProps) {
-   if (!galleryList.length) return;
 
-   const items = galleryList.map(({ id, image, name, url, width, height }) => render({id, image, name, url, width, height}));
+   if (!galleryList.length) return <p className='no-items'>Items not found</p>;
+
+   const items = galleryList.map(({ id, image, name, url, width, height }) =>
+      render({ id, image, name, url, width, height })
+   );
    return <div className="gallery-list">{items} </div>;
 }
