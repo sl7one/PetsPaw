@@ -23,15 +23,23 @@
          background-color: var(--primary-light);
       }
    }
+
+   &__item.active {
+      background-color: var(--primary);
+
+      svg {
+         fill: var(--main-white);
+      }
+   }
 }
 
 .page-header-wrapper {
    justify-self: flex-end;
-   
+
    display: flex;
    justify-content: space-between;
 
-   @media screen and (min-width: "1440px"){
+   @media screen and (min-width: '1440px') {
       order: 1;
    }
 }

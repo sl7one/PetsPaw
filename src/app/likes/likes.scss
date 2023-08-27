@@ -1,0 +1,15 @@
+.likes {
+   .gallery-list__item {
+      img {
+         transition: filter var(--transition);
+      }
+      &:hover {
+         &::after {
+            background-color: transparent;
+         }
+         img {
+            filter: saturate(150%);
+         }
+      }
+   }
+}

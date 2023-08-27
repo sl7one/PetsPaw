@@ -3,15 +3,22 @@
 import Link from 'next/link';
 import React from 'react';
 import Icon from '../Icon/Icon';
+import { usePathname } from 'next/navigation';
 import './like-links.scss';
 
 export default function LikeLinks() {
+   const path = usePathname();
+
    return (
       <div className="page-header-wrapper">
          <div className="like-links">
             <Link
-               href="/"
-               className="like-links__item"
+               href="/likes"
+               className={
+                  path === '/likes'
+                     ? 'like-links__item active'
+                     : 'like-links__item'
+               }
             >
                <Icon
                   name="icon-like"
@@ -20,8 +27,12 @@ export default function LikeLinks() {
                />
             </Link>
             <Link
-               href="/"
-               className="like-links__item"
+               href="/favourites"
+               className={
+                  path === '/favourites'
+                     ? 'like-links__item active'
+                     : 'like-links__item'
+               }
             >
                <Icon
                   name="icon-favorite"
@@ -30,8 +41,12 @@ export default function LikeLinks() {
                />
             </Link>
             <Link
-               href="/"
-               className="like-links__item"
+               href="/dislikes"
+               className={
+                  path === '/dislikes'
+                     ? 'like-links__item active'
+                     : 'like-links__item'
+               }
             >
                <Icon
                   name="icon-dislike"
