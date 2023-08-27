@@ -12,15 +12,14 @@ import { useFetch } from '../hooks/useFeth';
 import { addToFavorites, getCatsGallery } from '../API/api';
 import Icon from '../components/Icon/Icon';
 import Loader from '../components/Loader/Loader';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import './gallery.scss';
-import Modal from '../components/Modal/Modal';
 import useMedia from '../hooks/useMedia';
 import ButtonBurger from '../components/ButtonBurrger/ButtonBurger';
+import ButtonUpload from '../components/ButtonUpload/ButtonUpload';
 
 const Gallery = () => {
    const { isMobile, isTablet } = useMedia();
-   const modalRef = useRef(null);
    const [form, setForm] = useState({
       breed: 'None',
       limit: 5,
@@ -29,6 +28,7 @@ const Gallery = () => {
    });
    const [submitTrigger, setSubmitTrigger] = useState(null);
    const [handleIsLoading, setHandleIsLoading] = useState(false);
+   const [valueSearchForm, setValueSearchForm] = useState('');
 
    const { data, isLoading, error } = useFetch({
       api_cb: useCallback(() => getCatsGallery(form), [form]),
@@ -50,11 +50,9 @@ const Gallery = () => {
       setSubmitTrigger(form);
    };
 
-   const onClickUpload = () => {
-      if (modalRef.current) {
-         modalRef.current.classList.add('opened');
-      }
-   };
+   const onChangeSearchForm = useCallback((value: string) => {
+      setValueSearchForm(value);
+   }, []);
 
    return (
       <main className="gallery home container">
@@ -62,26 +60,16 @@ const Gallery = () => {
          <section className="home__right ">
             <div className="page__header">
                <ButtonBurger />
-               <SearchBar />
+               <SearchBar
+                  value={valueSearchForm}
+                  onChange={onChangeSearchForm}
+               />
                <LikeLinks />
             </div>
             <div className="page__body">
                <div className="gallery__body-header">
                   <BackComponent />
-                  <Button
-                     width={143}
-                     className="upload"
-                     onClick={onClickUpload}
-                  >
-                     <span>
-                        <Icon
-                           name="icon-upload"
-                           width={16}
-                           height={16}
-                        />{' '}
-                        upload
-                     </span>
-                  </Button>
+                  <ButtonUpload />
                </div>
                <FilterForm
                   onChange={onChange}
@@ -106,7 +94,7 @@ const Gallery = () => {
                               <>
                                  <Image
                                     src={url ? url : '/default.jpg'}
-                                    alt={name}
+                                    alt={name || 'cat picture'}
                                     width={width && 500}
                                     height={height && 500}
                                  />
@@ -130,7 +118,6 @@ const Gallery = () => {
                )}
             </div>
          </section>
-         <Modal ref={modalRef} />
       </main>
    );
 };

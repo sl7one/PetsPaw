@@ -14,7 +14,7 @@ import ButtonBurger from '../components/ButtonBurrger/ButtonBurger';
 import '../likes/likes.scss';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-
+import Link from 'next/link';
 
 const Search = () => {
    const searchParams = useSearchParams();
@@ -35,7 +35,6 @@ const Search = () => {
    const onChange = (value: string) => {
       setValue(value);
    };
-
 
    if (!catsData.length) return;
 
@@ -61,13 +60,15 @@ const Search = () => {
                   <BackComponent />
                   <div className="breeds__header-wrapper"></div>
                </div>
+               <p className='search-results'>Search results for: <span>{value}</span></p>
                {catsIsLoading ? (
                   <Loader />
                ) : (
                   <GalleryGrid
                      galleryList={items}
                      render={({ id, image, name }) => (
-                        <div
+                        <Link
+                           href={`/breeds/${id}`}
                            key={id}
                            className="gallery-list__item"
                         >
@@ -78,7 +79,7 @@ const Search = () => {
                               height={image?.height ? image.height : 500}
                            />
                            <p>{name}</p>
-                        </div>
+                        </Link>
                      )}
                   />
                )}

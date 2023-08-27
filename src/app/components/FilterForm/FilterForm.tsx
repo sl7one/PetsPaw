@@ -12,7 +12,7 @@ import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 
 interface IProps {
-   onChange: () => void;
+   onChange: (value: { id: number; value: number | string }) => void;
    onClickSubmit: () => void;
    defaultValue: {
       breed: string;

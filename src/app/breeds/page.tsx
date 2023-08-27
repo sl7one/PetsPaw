@@ -36,6 +36,8 @@ const Breeds = () => {
       limit: 10,
       breed: 'None',
    });
+   const [value, setValue] = useState('');
+
    const {
       data: catsData,
       isLoading: catsIsLoading,
@@ -54,7 +56,6 @@ const Breeds = () => {
       storageKey: 'breedsOptionts',
    });
 
-
    const optionsBreeds: OptionType[] = useMemo(
       () =>
          optionsData.map(({ name }: { name: string }) => ({
@@ -64,12 +65,15 @@ const Breeds = () => {
       [optionsData]
    );
 
-   if (!catsData.length || !optionsData.length) return;
-
-
    const onChange = ({ id, value }: SelectEventType) => {
       setFilter((prev) => ({ ...prev, [id]: value }));
    };
+
+   const onChangeSearchForm = useCallback((value: string) => {
+      setValue(value);
+   }, []);
+
+   if (!catsData.length || !optionsData.length) return;
 
    return (
       <main className="breeds home container">
@@ -77,7 +81,10 @@ const Breeds = () => {
          <section className="home__right">
             <div className="page__header">
                <ButtonBurger />
-               <SearchBar />
+               <SearchBar
+                  value={value}
+                  onChange={onChangeSearchForm}
+               />
                <LikeLinks />
             </div>
             <div className="page__body">
