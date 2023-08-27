@@ -54,6 +54,7 @@ const Breeds = () => {
       storageKey: 'breedsOptionts',
    });
 
+
    const optionsBreeds: OptionType[] = useMemo(
       () =>
          optionsData.map(({ name }: { name: string }) => ({
@@ -62,6 +63,9 @@ const Breeds = () => {
          })),
       [optionsData]
    );
+
+   if (!catsData.length || !optionsData.length) return;
+
 
    const onChange = ({ id, value }: SelectEventType) => {
       setFilter((prev) => ({ ...prev, [id]: value }));

@@ -1,14 +1,11 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/scss';
 import 'swiper/scss/pagination';
-import { useFetch } from '@/app/hooks/useFeth';
-import { getBreedsImgLimited } from '@/app/API/api';
 import Loader from '../Loader/Loader';
 import Image from 'next/image';
 import './swiper-component.scss';
-import useMedia from '@/app/hooks/useMedia';
 
 type ItemType = {
    id: string;
@@ -23,12 +20,7 @@ export interface IState {
    error: string;
 }
 
-export default function SwiperComponent({ breedId }: { breedId: string }) {
-   const { isMobile } = useMedia();
-   const { data, isLoading, error }: IState = useFetch({
-      api_cb: useCallback(() => getBreedsImgLimited(breedId), [breedId]),
-   });
-
+export default function SwiperComponent({ data, isLoading }: IState) {
    if (isLoading) {
       return (
          <Loader
@@ -62,7 +54,7 @@ export default function SwiperComponent({ breedId }: { breedId: string }) {
          pagination={{ clickable: true }}
          style={{
             width: '85vw',
-            maxHeight: "40vh",
+            maxHeight: '40vh',
             marginTop: '20px',
             borderRadius: '20px',
          }}

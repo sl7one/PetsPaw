@@ -1,10 +1,8 @@
 'use client';
 
-import { getSingleBreed } from '@/app/API/api';
-import { useFetch } from '@/app/hooks/useFeth';
-import React, { useCallback } from 'react';
+import React from 'react';
 import Loader from '../Loader/Loader';
-import './pet-info.scss'
+import './pet-info.scss';
 
 type DataType = {
    name: string;
@@ -21,14 +19,9 @@ type DataType = {
 export interface IState {
    data: DataType;
    isLoading: boolean;
-   error: string;
 }
 
-export default function PetInfo({ breedId }: { breedId: string }) {
-   const { data, isLoading, error }: IState = useFetch({
-      api_cb: useCallback(() => getSingleBreed(breedId), [breedId]),
-   });
-
+export default function PetInfo({ data, isLoading }: IState) {
    if (isLoading) {
       return (
          <Loader

@@ -9,6 +9,9 @@ import PetInfo from '@/app/components/PetInfo/PetInfo';
 import SwiperComponent from '@/app/components/SwiperComponent/SwiperComponent';
 import useMedia from '@/app/hooks/useMedia';
 import ButtonBurger from '@/app/components/ButtonBurrger/ButtonBurger';
+import { useFetch } from '@/app/hooks/useFeth';
+import { useCallback } from 'react';
+import { getBreedsImgLimited, getSingleBreed } from '@/app/API/api';
 
 type DataType = {
    name: string;
@@ -35,14 +38,32 @@ interface IProps {
 }
 
 const BreedPage = ({ params: { breedId } }: IProps) => {
-   const { isMobile , isTablet} = useMedia();
+   const { isMobile, isTablet } = useMedia();
+
+   const {
+      data: dataSingle,
+      isLoading: isLoadingSingle,
+      error: errorSingle,
+   }: IState = useFetch({
+      api_cb: useCallback(() => getSingleBreed(breedId), [breedId]),
+   });
+   
+   const {
+      data: dataLimited,
+      isLoading: isLoadingLimited,
+      error: errorLimited,
+   }: IState = useFetch({
+      api_cb: useCallback(() => getBreedsImgLimited(breedId), [breedId]),
+   });
+
+   if (!dataLimited.length) return;
 
    return (
       <main className="breed-page home container">
          {!isMobile && !isTablet && <LesftSection />}
          <section className="home__right">
             <div className="page__header">
-               <ButtonBurger/>
+               <ButtonBurger />
                <SearchBar />
                <LikeLinks />
             </div>
@@ -50,8 +71,14 @@ const BreedPage = ({ params: { breedId } }: IProps) => {
                <div className="page__header">
                   <BackComponent />
                </div>
-               <SwiperComponent breedId={breedId} />
-               <PetInfo breedId={breedId} />
+               <SwiperComponent
+                  data={dataLimited}
+                  isLoading={isLoadingLimited}
+               />
+               <PetInfo
+                  data={dataSingle}
+                  isLoading={isLoadingSingle}
+               />
             </div>
          </section>
       </main>
