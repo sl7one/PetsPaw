@@ -39,7 +39,6 @@ const Voting = () => {
    const { isMobile, isTablet } = useMedia();
 
    const [vote, setVote] = useState(null);
-   const [dataVotes, setDataVotes] = useState(null);
    const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
    const [favoriteId, setFavoriteId] = useState(0);
 
@@ -48,24 +47,33 @@ const Voting = () => {
       isLoading: isLoadingCats,
       error: errorCats,
    } = useFetch({
-      storage: false,
       api_cb: getRandom,
+      dependency: vote,
    });
 
-   useEffect(() => {
-      setDataVotes((prev) => ({ ...prev, isLoadingVotes: true }));
-      const getData = async () => {
-         try {
-            const data = await getVotes();
-            setDataVotes((prev) => ({ ...prev, dataVotes: data }));
-         } catch (error) {
-            setDataVotes((prev) => ({ ...prev, errorVotes: error.message }));
-         } finally {
-            setDataVotes((prev) => ({ ...prev, isLoadingVotes: false }));
-         }
-      };
-      getData();
-   }, [vote]);
+   const {
+      data: dataVotes = null,
+      isLoading: isLoadingVotes,
+      error: errorVotes,
+   } = useFetch({
+      api_cb: getVotes,
+      dependency: vote,
+   });
+
+   // useEffect(() => {
+   //    setDataVotes((prev) => ({ ...prev, isLoadingVotes: true }));
+   //    const getData = async () => {
+   //       try {
+   //          const data = await getVotes();
+   //          setDataVotes((prev) => ({ ...prev, dataVotes: data }));
+   //       } catch (error) {
+   //          setDataVotes((prev) => ({ ...prev, errorVotes: error.message }));
+   //       } finally {
+   //          setDataVotes((prev) => ({ ...prev, isLoadingVotes: false }));
+   //       }
+   //    };
+   //    getData();
+   // }, [vote]);
 
    const onClickVote = async (value: number) => {
       try {
@@ -83,19 +91,18 @@ const Voting = () => {
       } else {
          const data = await addToFavorites(dataCats[0].id);
          setIsAddedToFavorites(true);
-         setFavoriteId(data.id)
+         setFavoriteId(data.id);
       }
    };
 
    if (!dataCats || !dataVotes) return;
-
 
    return (
       <main className="voting home container">
          {!isMobile && !isTablet && <LesftSection />}
          <section className="home__right">
             <div className="page__header">
-               <ButtonBurger/>
+               <ButtonBurger />
                <SearchBar />
                <LikeLinks />
             </div>
@@ -116,15 +123,15 @@ const Voting = () => {
                      <LikeButtons
                         onClickVote={onClickVote}
                         onClickFavorite={onClickFavorite}
-                        isDisabled={dataVotes.isLoading}
+                        isDisabled={isLoadingVotes}
                         isAddedToFavorites={isAddedToFavorites}
                      />
                   </div>
                )}
 
                <VotingList
-                  list={dataVotes.dataVotes}
-                  isLoading={dataVotes.isLoadingVotes}
+                  list={dataVotes}
+                  isLoading={isLoadingVotes}
                />
             </div>
          </section>

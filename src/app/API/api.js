@@ -3,6 +3,7 @@ import axios from 'axios';
 const apiKey = 'live_ly5DxqJrUSw1DoNQe0mO6jsCdxZW8NugNjD2pAkrBLSblmM9oHw1FLcAVN1J1tgC';
 axios.defaults.baseURL = 'https://api.thecatapi.com/v1';
 axios.defaults.headers.common['x-api-key'] = apiKey;
+const sub_id = 'current-user';
 
 export const getRandom = async () => {
    const { data } = await axios.get('/images/search');
@@ -17,19 +18,19 @@ export const getVotes = async () => {
 export const postVotes = async ({ value, image_id }) => {
    const { data } = await axios.post('/votes', {
       image_id,
-      sub_id: 'my-user',
+      sub_id,
       value,
    });
    return data;
 };
 
 export const getFavorites = async (id) => {
-   const { data } = await axios.get(`/favourites`, {  sub_id: 'my-user' });
+   const { data } = await axios.get(`/favourites`, { sub_id });
    return data;
 };
 
 export const addToFavorites = async (id) => {
-   const { data } = await axios.post(`/favourites`, { image_id: id, sub_id: 'my-user' });
+   const { data } = await axios.post(`/favourites`, { image_id: id, sub_id });
    return data;
 };
 

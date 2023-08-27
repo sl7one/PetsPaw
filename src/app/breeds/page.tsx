@@ -42,7 +42,6 @@ const Breeds = () => {
       error: catsError,
    } = useFetch({
       api_cb: useCallback(() => getBreeds(filter), [filter]),
-      storage: false,
    });
 
    const {
@@ -51,6 +50,7 @@ const Breeds = () => {
       error: optionsError,
    } = useFetch({
       api_cb: getBreeds,
+      storage: true,
       storageKey: 'breedsOptionts',
    });
 

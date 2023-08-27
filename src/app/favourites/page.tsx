@@ -31,7 +31,7 @@ const Breeds = () => {
       error: catsError,
    } = useFetch({
       api_cb: getFavorites,
-      storage: false,
+      // storage: false,
    });
 
    if (!catsData) return;

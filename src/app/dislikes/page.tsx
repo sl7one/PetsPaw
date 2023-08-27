@@ -13,8 +13,6 @@ import useMedia from '../hooks/useMedia';
 import ButtonBurger from '../components/ButtonBurrger/ButtonBurger';
 import '../likes/likes.scss';
 
-
-
 export type OptionType = {
    label: string;
    value: string | number;
@@ -34,7 +32,7 @@ const Breeds = () => {
       error: catsError,
    } = useFetch({
       api_cb: getVotes,
-      storage: false,
+      // storage: false,
    });
 
    if (!catsData) return;

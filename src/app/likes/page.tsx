@@ -32,7 +32,7 @@ const Breeds = () => {
       error: catsError,
    } = useFetch({
       api_cb: getVotes,
-      storage: false,
+      // storage: false,
    });
 
    if (!catsData) return;
