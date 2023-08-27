@@ -27,11 +27,12 @@ const Gallery = () => {
       order: 'Random',
       type: 'Static',
    });
+   const [submitTrigger, setSubmitTrigger] = useState(null);
    const [handleIsLoading, setHandleIsLoading] = useState(false);
-   // const [trigger, setTrigger] = useState(0);
 
    const { data, isLoading, error } = useFetch({
       api_cb: useCallback(() => getCatsGallery(form), [form]),
+      dependency: submitTrigger,
    });
 
    const onClickItem = async (id: string) => {
@@ -46,8 +47,7 @@ const Gallery = () => {
 
    const onClickSubmit = (e) => {
       e.preventDefault();
-      console.log('submit');
-      // setTrigger(Date.now());
+      setSubmitTrigger(form);
    };
 
    const onClickUpload = () => {
