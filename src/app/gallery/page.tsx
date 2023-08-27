@@ -9,7 +9,7 @@ import LesftSection from '../components/LeftSection/LesftSection';
 import LikeLinks from '../components/LikeLinks/LikeLinks';
 import SearchBar from '../components/SearchBar/SearchBar';
 import { useFetch } from '../hooks/useFeth';
-import { getCatsGallery } from '../API/api';
+import { addToFavorites, getCatsGallery } from '../API/api';
 import Icon from '../components/Icon/Icon';
 import Loader from '../components/Loader/Loader';
 import { useCallback, useRef, useState } from 'react';
@@ -27,13 +27,17 @@ const Gallery = () => {
       order: 'Random',
       type: 'Static',
    });
-   const [trigger, setTrigger] = useState(0);
+   const [handleIsLoading, setHandleIsLoading] = useState(false);
+   // const [trigger, setTrigger] = useState(0);
+
    const { data, isLoading, error } = useFetch({
       api_cb: useCallback(() => getCatsGallery(form), [form]),
    });
 
-   const onClikItem = (id: string) => {
-      console.log(id);
+   const onClickItem = async (id: string) => {
+      setHandleIsLoading(true);
+      await addToFavorites(id);
+      setHandleIsLoading(false);
    };
 
    const onChange = ({ id, value }: { id: number; value: number | string }) => {
@@ -42,7 +46,8 @@ const Gallery = () => {
 
    const onClickSubmit = (e) => {
       e.preventDefault();
-      setTrigger(Date.now());
+      console.log('submit');
+      // setTrigger(Date.now());
    };
 
    const onClickUpload = () => {
@@ -56,7 +61,7 @@ const Gallery = () => {
          {!isMobile && !isTablet && <LesftSection />}
          <section className="home__right ">
             <div className="page__header">
-               <ButtonBurger/>
+               <ButtonBurger />
                <SearchBar />
                <LikeLinks />
             </div>
@@ -95,7 +100,7 @@ const Gallery = () => {
                         <div
                            key={id}
                            className="gallery-list__item"
-                           onClick={() => onClikItem(id)}
+                           onClick={() => onClickItem(id)}
                         >
                            {
                               <>
@@ -109,6 +114,7 @@ const Gallery = () => {
                                     width={40}
                                     height={40}
                                     className="like-gallery-item"
+                                    isDisabled={handleIsLoading}
                                  >
                                     <Icon
                                        name="icon-favorite"
