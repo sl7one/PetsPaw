@@ -35,6 +35,8 @@ const Gallery = () => {
       dependency: submitTrigger,
    });
 
+   console.log(data)
+
    const onClickItem = async (id: string) => {
       setHandleIsLoading(true);
       await addToFavorites(id);

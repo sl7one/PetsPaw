@@ -10,7 +10,7 @@ interface IProps {
    className?: string;
    type?: string;
    isDisabled?: boolean;
-   onClick?: () => void;
+   onClick?: () => void ;
 }
 
 export default function Button({

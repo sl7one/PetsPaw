@@ -19,21 +19,10 @@ import { useFetch } from '../hooks/useFeth';
 import Image from 'next/image';
 import Loader from '../components/Loader/Loader';
 import VotingList from '../components/VotingList/VotingList';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import useMedia from '../hooks/useMedia';
 import ButtonBurger from '../components/ButtonBurrger/ButtonBurger';
-// type RandomItemType = {
-//    id: string;
-//    url: string;
-//    width: number;
-//    height: number;
-// };
 
-// interface IRandomPet {
-//    data: [RandomItemType];
-//    error: unknown;
-//    isLoading: boolean;
-// }
 
 const Voting = () => {
    const { isMobile, isTablet } = useMedia();

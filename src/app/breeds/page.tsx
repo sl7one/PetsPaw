@@ -2,7 +2,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import BackComponent from '../components/BackComponent/BackComponent';
 import LesftSection from '../components/LeftSection/LesftSection';
-import { getBreeds } from '../API/api';
+import { getBreeds, getCatsGallery } from '../API/api';
 import { useFetch } from '../hooks/useFeth';
 import './breeds.scss';
 import SearchBar from '../components/SearchBar/SearchBar';
@@ -45,6 +45,15 @@ const Breeds = () => {
    } = useFetch({
       api_cb: useCallback(() => getBreeds(filter), [filter]),
    });
+
+   // const {
+   //    data: catsData,
+   //    isLoading: catsIsLoading,
+   //    error: catsError,
+   // } = useFetch({
+   //    api_cb: useCallback(() => getCatsGallery(filter), [filter]),
+   //    dependency: filter,
+   // });
 
    const {
       data: optionsData,

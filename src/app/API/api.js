@@ -44,8 +44,8 @@ export const getBreeds = async (options) => {
       const { data } = await axios.get(`/breeds`);
       return data;
    } else {
-      const { limit, order } = options;
-      const { data } = await axios.get(`/breeds?limit=${limit}&order=${order}`);
+      const { limit, order, breed } = options;
+      const { data } = await axios.get(`/breeds?limit=${limit}&order=${order}&breed_ids=${breed}`);
       return data;
    }
 };

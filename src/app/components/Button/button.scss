@@ -15,8 +15,6 @@
       transition: fill var(--transition);
    }
 
-
-
    &:hover svg {
       fill: var(--main-white);
    }
@@ -61,7 +59,6 @@
       fill: var(--orange);
    }
 }
-
 
 .button.upload {
    width: 100% !important;
@@ -158,5 +155,20 @@
 
    &:hover svg {
       fill: var(--primary);
+   }
+}
+
+.button.submit {
+   width: 100% !important;
+   min-width: 40px !important;
+
+   background-color: var(--main-white);
+
+   &:hover svg {
+      fill: var(--primary);
+   }
+
+   @media screen and (min-width: '768px') {
+      width: unset !important;
    }
 }

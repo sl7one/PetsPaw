@@ -10,7 +10,7 @@ import SwiperComponent from '@/app/components/SwiperComponent/SwiperComponent';
 import useMedia from '@/app/hooks/useMedia';
 import ButtonBurger from '@/app/components/ButtonBurrger/ButtonBurger';
 import { useFetch } from '@/app/hooks/useFeth';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { getBreedsImgLimited, getSingleBreed } from '@/app/API/api';
 
 type DataType = {
@@ -39,6 +39,7 @@ interface IProps {
 
 const BreedPage = ({ params: { breedId } }: IProps) => {
    const { isMobile, isTablet } = useMedia();
+   const [value, setValue] = useState('');
 
    const {
       data: dataSingle,
@@ -47,7 +48,7 @@ const BreedPage = ({ params: { breedId } }: IProps) => {
    }: IState = useFetch({
       api_cb: useCallback(() => getSingleBreed(breedId), [breedId]),
    });
-   
+
    const {
       data: dataLimited,
       isLoading: isLoadingLimited,
@@ -55,6 +56,10 @@ const BreedPage = ({ params: { breedId } }: IProps) => {
    }: IState = useFetch({
       api_cb: useCallback(() => getBreedsImgLimited(breedId), [breedId]),
    });
+
+   const onChangeSearchForm = useCallback((value: string) => {
+      setValue(value);
+   }, []);
 
    if (!dataLimited.length) return;
 
@@ -64,7 +69,10 @@ const BreedPage = ({ params: { breedId } }: IProps) => {
          <section className="home__right">
             <div className="page__header">
                <ButtonBurger />
-               <SearchBar />
+               <SearchBar
+                  onChange={onChangeSearchForm}
+                  value={value}
+               />
                <LikeLinks />
             </div>
             <div className="page__body">
