@@ -1,7 +1,7 @@
 'use client';
 import BackComponent from '../components/BackComponent/BackComponent';
 import LesftSection from '../components/LeftSection/LesftSection';
-import { addToFavorites, deleteFromFavorites, getFavorites, getVotes } from '../API/api';
+import { getFavorites, getVotes } from '../API/api';
 import { useFetch } from '../hooks/useFeth';
 import SearchBar from '../components/SearchBar/SearchBar';
 import LikeLinks from '../components/LikeLinks/LikeLinks';
@@ -11,6 +11,7 @@ import Image from 'next/image';
 import useMedia from '../hooks/useMedia';
 import ButtonBurger from '../components/ButtonBurrger/ButtonBurger';
 import '../likes/likes.scss';
+import './favorites.scss';
 import { useCallback, useState } from 'react';
 import VotingList from '../components/VotingList/VotingList';
 import Button from '../components/Button/Button';
@@ -49,27 +50,35 @@ const Breeds = () => {
       dependency: vote,
    });
 
+   const {
+      data: dataFavorites = null,
+      isLoading: isLoadingFavorites,
+      error: errorFavorites,
+   } = useFetch({
+      api_cb: getFavorites,
+   });
+
    const onChangeSearchForm = useCallback((value: string) => {
       setValue(value);
    }, []);
 
-   const onClickFavorite = async () => {
-      if (isAddedToFavorites) {
-         setHandleIsLoading(true)
-         await deleteFromFavorites(favoriteId);
-         setHandleIsLoading(false);
-      } else {
-         setHandleIsLoading(true)
-         const data = await addToFavorites(dataCats[0].id);
-         setHandleIsLoading(false);
+  
+
+   if (!catsData.length) return;
+   if (!dataFavorites?.length) return;
+
+   const items = catsData.map((cat) => {
+      const favorite = dataFavorites.find((fav) => cat.image_id === fav.image_id);
+      if (!favorite) {
+         return cat;
       }
-   };
+      return { ...cat, favoriteId: favorite.id };
+   });
 
-
-   if (!catsData) return;
+   console.log(items);
 
    return (
-      <main className="likes home container">
+      <main className="favorites home container">
          {!isMobile && !isTablet && <LesftSection />}
          <section className="home__right">
             <div className="page__header">
@@ -89,11 +98,12 @@ const Breeds = () => {
                   <Loader />
                ) : (
                   <GalleryGrid
-                     galleryList={catsData}
-                     render={({ id, image, name }) => (
+                     galleryList={items}
+                     render={({ id, image, name, favoriteId }) => (
                         <div
                            key={id}
                            className="gallery-list__item"
+                          
                         >
                            <Image
                               src={image?.url ? image.url : '/default.jpg'}
@@ -105,14 +115,20 @@ const Breeds = () => {
                               width={40}
                               height={40}
                               className="like-gallery-item"
-                              isDisabled={handleIsLoading}
-                              onClick={onClickFavorite}
                            >
-                              <Icon
-                                 name="icon-favorite"
-                                 width={20}
-                                 height={20}
-                              />
+                              {!favoriteId ? (
+                                 <Icon
+                                    name="icon-favorite"
+                                    width={20}
+                                    height={20}
+                                 />
+                              ) : (
+                                 <Icon
+                                    name="icon-favorite-filled"
+                                    width={20}
+                                    height={20}
+                                 />
+                              )}
                            </Button>
                         </div>
                      )}

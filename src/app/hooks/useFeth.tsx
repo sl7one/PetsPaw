@@ -16,7 +16,6 @@ export const useFetch = ({ api_cb, storageKey, storage = false, dependency }: IP
    });
 
    useEffect(() => {
-
       if (storage) {
          const dataStorage = store.get(storageKey);
          if (dataStorage?.length > 0) {
@@ -56,9 +55,8 @@ export const useFetch = ({ api_cb, storageKey, storage = false, dependency }: IP
    }, []);
 
    useEffect(() => {
-      
       if (!dependency) return;
-     
+
       const getData = async () => {
          setData((prev) => ({
             ...prev,
@@ -71,7 +69,6 @@ export const useFetch = ({ api_cb, storageKey, storage = false, dependency }: IP
                ...prev,
                data,
             }));
-
          } catch (error) {
             console.log(error.message);
             setData((prev) => ({
@@ -89,5 +86,6 @@ export const useFetch = ({ api_cb, storageKey, storage = false, dependency }: IP
       getData();
    }, [dependency]);
 
+   data.setData = setData;
    return data;
 };

@@ -44,16 +44,9 @@ const Breeds = () => {
       error: catsError,
    } = useFetch({
       api_cb: useCallback(() => getBreeds(filter), [filter]),
+      dependency: filter,
    });
 
-   // const {
-   //    data: catsData,
-   //    isLoading: catsIsLoading,
-   //    error: catsError,
-   // } = useFetch({
-   //    api_cb: useCallback(() => getCatsGallery(filter), [filter]),
-   //    dependency: filter,
-   // });
 
    const {
       data: optionsData,

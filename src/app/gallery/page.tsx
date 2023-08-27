@@ -9,7 +9,12 @@ import LesftSection from '../components/LeftSection/LesftSection';
 import LikeLinks from '../components/LikeLinks/LikeLinks';
 import SearchBar from '../components/SearchBar/SearchBar';
 import { useFetch } from '../hooks/useFeth';
-import { addToFavorites, getCatsGallery } from '../API/api';
+import {
+   addToFavorites,
+   deleteFromFavorites,
+   getCatsGallery,
+   getFavorites,
+} from '../API/api';
 import Icon from '../components/Icon/Icon';
 import Loader from '../components/Loader/Loader';
 import { useCallback, useState } from 'react';
@@ -30,18 +35,18 @@ const Gallery = () => {
    const [handleIsLoading, setHandleIsLoading] = useState(false);
    const [valueSearchForm, setValueSearchForm] = useState('');
 
-   const { data, isLoading, error } = useFetch({
+   const { data, isLoading, error, setData } = useFetch({
       api_cb: useCallback(() => getCatsGallery(form), [form]),
       dependency: submitTrigger,
    });
 
-   console.log(data)
-
-   const onClickItem = async (id: string) => {
-      setHandleIsLoading(true);
-      await addToFavorites(id);
-      setHandleIsLoading(false);
-   };
+   const {
+      data: dataFavorites = null,
+      isLoading: isLoadingFavorites,
+      error: errorFavorites,
+   } = useFetch({
+      api_cb: getFavorites,
+   });
 
    const onChange = ({ id, value }: { id: number; value: number | string }) => {
       setForm((prev) => ({ ...prev, [id]: value }));
@@ -55,6 +60,31 @@ const Gallery = () => {
    const onChangeSearchForm = useCallback((value: string) => {
       setValueSearchForm(value);
    }, []);
+
+ 
+
+   const items = data.map((cat) => {
+      const favorite = dataFavorites.find((fav) => {
+         const image_id = cat.id || cat.breeds[0]?.image_id;
+         return image_id === fav.image_id;
+      });
+      if (!favorite) {
+         return cat;
+      }
+      return { ...cat, favoriteId: favorite.id };
+   });
+
+   const onClickItem = async ({ id, favoriteId }: { is: string; favoriteId: number }) => {
+      setHandleIsLoading(true);
+      if (favoriteId) {
+         await deleteFromFavorites(favoriteId);
+         setHandleIsLoading(false);
+         return;
+      }
+      await addToFavorites(id);
+
+      setHandleIsLoading(false);
+   };
 
    return (
       <main className="gallery home container">
@@ -85,12 +115,16 @@ const Gallery = () => {
                   />
                ) : (
                   <GalleryGrid
-                     galleryList={data}
-                     render={({ id, name, url, width, height }) => (
+                     galleryList={items}
+                     render={({ id, name, url, width, height, favoriteId }) => (
                         <div
                            key={id}
                            className="gallery-list__item"
-                           onClick={() => onClickItem(id)}
+                           onClick={
+                              handleIsLoading
+                                 ? () => {}
+                                 : () => onClickItem({ id, favoriteId })
+                           }
                         >
                            {
                               <>
@@ -106,11 +140,19 @@ const Gallery = () => {
                                     className="like-gallery-item"
                                     isDisabled={handleIsLoading}
                                  >
-                                    <Icon
-                                       name="icon-favorite"
-                                       width={20}
-                                       height={20}
-                                    />
+                                    {!favoriteId ? (
+                                       <Icon
+                                          name="icon-favorite"
+                                          width={20}
+                                          height={20}
+                                       />
+                                    ) : (
+                                       <Icon
+                                          name="icon-favorite-filled"
+                                          width={20}
+                                          height={20}
+                                       />
+                                    )}
                                  </Button>
                               </>
                            }

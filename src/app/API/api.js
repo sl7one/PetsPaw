@@ -3,7 +3,7 @@ import axios from 'axios';
 const apiKey = 'live_ly5DxqJrUSw1DoNQe0mO6jsCdxZW8NugNjD2pAkrBLSblmM9oHw1FLcAVN1J1tgC';
 axios.defaults.baseURL = 'https://api.thecatapi.com/v1';
 axios.defaults.headers.common['x-api-key'] = apiKey;
-const sub_id = 'current-user';
+const sub_id = 'my-user';
 
 export const getRandom = async () => {
    const { data } = await axios.get('/images/search');
@@ -34,8 +34,8 @@ export const addToFavorites = async (id) => {
    return data;
 };
 
-export const deleteFromFavorites = async (image_id) => {
-   const { data } = await axios.delete(`/favourites/${image_id}`);
+export const deleteFromFavorites = async (favouriteId) => {
+   const { data } = await axios.delete(`/favourites/${favouriteId}`);
    return data;
 };
 
