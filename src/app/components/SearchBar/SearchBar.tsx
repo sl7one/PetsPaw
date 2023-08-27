@@ -20,8 +20,7 @@ export default function SearchBar({ value = '', onChange }: IProps) {
             onChange={({ target: { value } }) => onChange(value.trim().toLowerCase())}
          />
          <Link
-            type="submit"
-            className="button submit"
+            className="submit"
             href={{
                pathname: '/search',
                query: { q: value },
