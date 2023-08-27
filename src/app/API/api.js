@@ -23,8 +23,13 @@ export const postVotes = async ({ value, image_id }) => {
    return data;
 };
 
+export const getFavorites = async (id) => {
+   const { data } = await axios.get(`/favourites`, {  sub_id: 'my-user' });
+   return data;
+};
+
 export const addToFavorites = async (id) => {
-   const { data } = await axios.post(`/favourites`, { id, sub_id: 'my-user' });
+   const { data } = await axios.post(`/favourites`, { image_id: id, sub_id: 'my-user' });
    return data;
 };
 

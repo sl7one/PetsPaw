@@ -41,6 +41,7 @@ const Voting = () => {
    const [vote, setVote] = useState(null);
    const [dataVotes, setDataVotes] = useState(null);
    const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
+   const [favoriteId, setFavoriteId] = useState(0);
 
    const {
       data: dataCats = null,
@@ -76,19 +77,18 @@ const Voting = () => {
    };
 
    const onClickFavorite = async () => {
-      if (!isAddedToFavorites) {
-         // console.log('need to del')
-         // await deleteFromFavorites(dataCats[0].id);
-         // setVote({ value: -1000, image_id: dataCats[0].id });
-         setIsAddedToFavorites(true);
-      } else {
-         // await addToFavorites(dataCats[0].id);
-         // setVote({ value, image_id: dataCats[0].id });
+      if (isAddedToFavorites) {
+         await deleteFromFavorites(favoriteId);
          setIsAddedToFavorites(false);
+      } else {
+         const data = await addToFavorites(dataCats[0].id);
+         setIsAddedToFavorites(true);
+         setFavoriteId(data.id)
       }
    };
 
    if (!dataCats || !dataVotes) return;
+
 
    return (
       <main className="voting home container">
