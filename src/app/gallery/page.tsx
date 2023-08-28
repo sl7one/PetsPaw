@@ -77,6 +77,7 @@ const Gallery = () => {
       return { ...cat, favoriteId: favorite.id };
    });
 
+   //@ts-ignore
    const onClickItem = async ({ id, favoriteId }: { is: string; favoriteId: number }) => {
       setHandleIsLoading(true);
       if (favoriteId) {

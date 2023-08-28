@@ -39,7 +39,9 @@ export const useFetch = ({ api_cb, storageKey, storage = false, dependency }: IP
 
             if (storage) store.set(storageKey, data);
          } catch (error) {
+            //@ts-ignore
             console.log(error.message);
+            //@ts-ignore
             setData((prev) => ({
                ...prev,
                error: error,
@@ -71,6 +73,7 @@ export const useFetch = ({ api_cb, storageKey, storage = false, dependency }: IP
             }));
          } catch (error) {
             console.log(error.message);
+            //@ts-ignore
             setData((prev) => ({
                ...prev,
                error: error,

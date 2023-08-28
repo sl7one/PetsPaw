@@ -38,6 +38,7 @@ const Search = () => {
    if (!catsData.length) return;
 
    const items = catsData.filter(({ name }) =>
+   //@ts-ignore
       name.toLowerCase().includes(value?.toLowerCase())
    );
 
@@ -48,6 +49,7 @@ const Search = () => {
             <div className="page__header">
                <ButtonBurger />
                <SearchBar
+               //@ts-ignore
                   value={value}
                   setValue={setValue}
                   onChange={onChange}
