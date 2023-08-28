@@ -42,6 +42,7 @@ export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IP
                <SelectComponent
                   options={orderOptions}
                   id="order"
+                  //@ts-ignore
                   onChange={onChange}
                   defaulValue={{
                      label: defaultValue['order'],
@@ -55,6 +56,7 @@ export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IP
                <SelectComponent
                   options={typeOptions}
                   id="type"
+                  //@ts-ignore
                   onChange={onChange}
                   defaulValue={{
                      label: defaultValue['type'],
@@ -70,6 +72,7 @@ export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IP
                <SelectComponent
                   options={optionsBreeds}
                   id="breed"
+                  //@ts-ignore
                   onChange={onChange}
                   defaulValue={{
                      label: defaultValue['breed'],
@@ -84,6 +87,7 @@ export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IP
                <SelectComponent
                   options={optionsLimitPerPage}
                   id="limit"
+                  //@ts-ignore
                   onChange={onChange}
                   defaulValue={{
                      label: `${defaultValue['limit']} items per page`,
