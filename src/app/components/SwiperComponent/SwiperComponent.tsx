@@ -18,6 +18,7 @@ type ItemType = {
 export interface IState {
    data: ItemType[];
    isLoading: boolean;
+   error?: string;
 }
 
 export default function SwiperComponent({ data, isLoading }: IState) {
@@ -55,7 +56,7 @@ export default function SwiperComponent({ data, isLoading }: IState) {
          modules={[Pagination]}
          pagination={{ clickable: true }}
          style={{
-            width: isMobile ? '85vw' : "40vw",
+            width: isMobile ? '85vw' : '40vw',
             maxHeight: '40vh',
             marginTop: '20px',
             borderRadius: '20px',
