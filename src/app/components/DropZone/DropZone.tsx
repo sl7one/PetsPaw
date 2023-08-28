@@ -7,10 +7,14 @@ import { postCatImage } from '@/app/API/api';
 import Loader from '../Loader/Loader';
 import Icon from '../Icon/Icon';
 
+interface FileWithPreview extends File {
+   preview: string;
+}
+
 export default function DropZone() {
-   const [files, setFiles] = useState([]);
+   const [files, setFiles] = useState<FileWithPreview[]>([]);
    const [isLoading, setIsLoading] = useState(false);
-   const [isApproved, setIsApproved] = useState(0);
+   const [isApproved, setIsApproved] = useState<number>(0);
    const { getRootProps, getInputProps } = useDropzone({
       accept: {
          'image/jpeg': [],
