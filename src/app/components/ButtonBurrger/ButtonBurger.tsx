@@ -5,12 +5,15 @@ import Icon from '../Icon/Icon';
 import ModalBurger from '../ModalBurger/ModalBurger';
 
 export default function ButtonBurger() {
-   const ref = useRef(null);
+   const ref = useRef<HTMLDivElement>(null);
    const { isDesktop } = useMedia();
 
    const onClick = () => {
-        ref.current.classList.add('opened');
+      if (ref.current) {
+         ref.current.classList.add('opened');
+      }
    };
+
    return (
       <>
          {!isDesktop && (
