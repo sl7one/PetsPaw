@@ -95,7 +95,7 @@ const Voting = () => {
                   <div className="wrapper">
                      <div className="thumb">
                         <Image
-                           src={dataCats[0]?.url || '/default.jpg'}
+                           src={dataCats[0]?.url || './default.jpg'}
                            width={dataCats[0]?.width || 500}
                            height={dataCats[0]?.height || 500}
                            alt="pet image"

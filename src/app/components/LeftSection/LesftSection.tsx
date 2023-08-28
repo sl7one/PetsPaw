@@ -9,7 +9,7 @@ export default function LesftSection() {
       <section className="home__left ">
          <div className="home__left-sticky">
             <Image
-               src="/logo.svg"
+               src="./logo.svg"
                alt="logo"
                width={106}
                height={24}

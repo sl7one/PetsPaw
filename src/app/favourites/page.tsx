@@ -31,7 +31,6 @@ const Breeds = () => {
    const { isMobile, isTablet } = useMedia();
    const [vote, setVote] = useState(null);
    const [value, setValue] = useState('');
-   const [handleIsLoading, setHandleIsLoading] = useState(false);
 
    const {
       data: catsData,
@@ -41,10 +40,7 @@ const Breeds = () => {
       api_cb: getFavorites,
    });
 
-   const {
-      data: dataVotes = null,
-      isLoading: isLoadingVotes,
-   } = useFetch({
+   const { data: dataVotes = null, isLoading: isLoadingVotes } = useFetch({
       api_cb: getVotes,
       dependency: vote,
    });
@@ -60,19 +56,18 @@ const Breeds = () => {
       setValue(value);
    }, []);
 
-  
-
    if (!catsData.length) return;
    if (!dataFavorites?.length) return;
 
    const items = catsData.map((cat) => {
+      //@ts-ignore
       const favorite = dataFavorites.find((fav) => cat.image_id === fav.image_id);
       if (!favorite) {
          return cat;
       }
+      //@ts-ignore
       return { ...cat, favoriteId: favorite.id };
    });
-
 
    return (
       <main className="favorites home container">
@@ -100,10 +95,9 @@ const Breeds = () => {
                         <div
                            key={id}
                            className="gallery-list__item"
-                          
                         >
                            <Image
-                              src={image?.url ? image.url : '/default.jpg'}
+                              src={image?.url ? image.url : './default.jpg'}
                               alt={'cat picture'}
                               width={image?.width ? image.width : 500}
                               height={image?.height ? image.height : 500}
@@ -134,6 +128,7 @@ const Breeds = () => {
                )}
 
                <VotingList
+                  //@ts-ignore
                   list={dataVotes}
                   isLoading={isLoadingVotes}
                />

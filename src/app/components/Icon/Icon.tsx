@@ -22,7 +22,7 @@ export default function Icon({
          style={{ width: `${width}px`, height: `${height}px` }}
          fill={fill}
       >
-         <use href={'/sprite.svg' + `#${name}`}></use>
+         <use href={'./sprite.svg' + `#${name}`}></use>
       </svg>
    );
 }
