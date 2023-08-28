@@ -16,7 +16,7 @@ export default function LesftSection() {
             />
             <Image
                className="home__hi"
-               src="/hi.png"
+               src="./hi.png"
                alt="hi"
                width={103}
                height={46}
