@@ -77,9 +77,16 @@ export default function VotingList({ list, isLoading }: IProps) {
                         <span className="votes__item-date">{hh + ' : ' + mm}</span>
                         <p className="votes__item-text">
                            Image ID: <span>{image_id}</span> was added to{' '}
-                           <span>{votes[value].text}</span>
+                           {
+                              //@ts-ignore
+                              <span>{votes[value].text}</span>
+                           }
                         </p>
-                        {votes[value].icon}
+
+                        {
+                           //@ts-ignore
+                           votes[value].icon
+                        }
                      </li>
                   );
                })}
