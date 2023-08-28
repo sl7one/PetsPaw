@@ -18,7 +18,6 @@ type ItemType = {
 export interface IState {
    data: ItemType[];
    isLoading: boolean;
-   error: string;
 }
 
 export default function SwiperComponent({ data, isLoading }: IState) {
