@@ -14,7 +14,7 @@ const Home = () => {
             <section className="home__right">
                <div className="home__right-thumb">
                   <Image
-                     src="/girl-and-pet.png"
+                     src="./girl-and-pet.png"
                      alt="pic"
                      width={775}
                      height={900}
