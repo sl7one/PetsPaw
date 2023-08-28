@@ -23,7 +23,6 @@ import { useCallback, useState } from 'react';
 import useMedia from '../hooks/useMedia';
 import ButtonBurger from '../components/ButtonBurrger/ButtonBurger';
 
-
 const Voting = () => {
    const { isMobile, isTablet } = useMedia();
 
@@ -32,27 +31,24 @@ const Voting = () => {
    const [favoriteId, setFavoriteId] = useState(0);
    const [value, setValue] = useState('');
 
-   const {
-      data: dataCats = null,
-      isLoading: isLoadingCats,
-   } = useFetch({
+   const { data: dataCats = null, isLoading: isLoadingCats } = useFetch({
       api_cb: getRandom,
       dependency: vote,
    });
 
-   const {
-      data: dataVotes = null,
-      isLoading: isLoadingVotes,
-   } = useFetch({
+   const { data: dataVotes = null, isLoading: isLoadingVotes } = useFetch({
       api_cb: getVotes,
       dependency: vote,
    });
 
    const onClickVote = async (value: number) => {
       try {
+         //@ts-ignore
          await postVotes({ value, image_id: dataCats[0].id });
+         //@ts-ignore
          setVote({ value, image_id: dataCats[0].id });
       } catch (error) {
+         //@ts-ignore
          console.log(error.message);
       }
    };
@@ -62,6 +58,7 @@ const Voting = () => {
          await deleteFromFavorites(favoriteId);
          setIsAddedToFavorites(false);
       } else {
+         //@ts-ignore
          const data = await addToFavorites(dataCats[0].id);
          setIsAddedToFavorites(true);
          setFavoriteId(data.id);
@@ -71,7 +68,6 @@ const Voting = () => {
    const onChange = useCallback((value: string) => {
       setValue(value);
    }, []);
-
 
    if (!dataCats || !dataVotes) return;
 
@@ -95,8 +91,11 @@ const Voting = () => {
                   <div className="wrapper">
                      <div className="thumb">
                         <Image
-                           src={dataCats[0]?.url || './default.jpg'}
+                           //@ts-ignore
+                           src={dataCats[0]?.url || '/default.jpg'}
+                           //@ts-ignore
                            width={dataCats[0]?.width || 500}
+                           //@ts-ignore
                            height={dataCats[0]?.height || 500}
                            alt="pet image"
                         />

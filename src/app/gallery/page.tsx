@@ -126,7 +126,7 @@ const Gallery = () => {
                            {
                               <>
                                  <Image
-                                    src={url ? url : './default.jpg'}
+                                    src={url ? url : '/default.jpg'}
                                     alt={name || 'cat picture'}
                                     width={width && 500}
                                     height={height && 500}
