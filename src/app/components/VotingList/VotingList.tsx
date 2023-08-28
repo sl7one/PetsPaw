@@ -16,6 +16,8 @@ interface IProps {
 
 const votes: {
    1: { text: string; icon: React.ReactElement };
+   0: { text: string; icon: React.ReactElement };
+   '-1': { text: string; icon: React.ReactElement };
 } = {
    0: {
       text: 'Favorites',

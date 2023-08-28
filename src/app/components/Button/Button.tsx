@@ -8,7 +8,7 @@ interface IProps {
    height?: number;
    children: ReactElement;
    className?: string;
-   type?: string;
+   type?: "button" | "submit";
    isDisabled?: boolean;
    onClick?: () => void ;
 }

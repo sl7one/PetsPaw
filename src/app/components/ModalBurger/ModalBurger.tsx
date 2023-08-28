@@ -5,7 +5,7 @@ import Icon from '../Icon/Icon';
 import './modal-burger.scss';
 import Navigation from '../Navigation/Navigation';
 
-const ModalBurger = forwardRef((_, ref) => {
+const ModalBurger = forwardRef((_, ref: any) => {
     const onClickClose = () => {
         ref.current.classList.remove('opened');
      };

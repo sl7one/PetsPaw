@@ -86,6 +86,5 @@ export const useFetch = ({ api_cb, storageKey, storage = false, dependency }: IP
       getData();
    }, [dependency]);
 
-   data.setData = setData;
    return data;
 };

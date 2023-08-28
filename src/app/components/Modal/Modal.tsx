@@ -5,9 +5,11 @@ import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 import Link from 'next/link';
 
-const Modal = forwardRef((_, ref) => {
+const Modal = forwardRef((_, ref: any) => {
    const onClickClose = () => {
-      ref.current.classList.remove('opened');
+      if (ref.current) {
+         ref.current.classList.remove('opened');
+      }
    };
 
    return (

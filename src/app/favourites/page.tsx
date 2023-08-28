@@ -75,7 +75,6 @@ const Breeds = () => {
       return { ...cat, favoriteId: favorite.id };
    });
 
-   console.log(items);
 
    return (
       <main className="favorites home container">

@@ -35,7 +35,7 @@ const Gallery = () => {
    const [handleIsLoading, setHandleIsLoading] = useState(false);
    const [valueSearchForm, setValueSearchForm] = useState('');
 
-   const { data, isLoading, error, setData } = useFetch({
+   const { data, isLoading, error } = useFetch({
       api_cb: useCallback(() => getCatsGallery(form), [form]),
       dependency: submitTrigger,
    });
@@ -52,7 +52,7 @@ const Gallery = () => {
       setForm((prev) => ({ ...prev, [id]: value }));
    };
 
-   const onClickSubmit = (e) => {
+   const onClickSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setSubmitTrigger(form);
    };
@@ -60,8 +60,6 @@ const Gallery = () => {
    const onChangeSearchForm = useCallback((value: string) => {
       setValueSearchForm(value);
    }, []);
-
- 
 
    const items = data.map((cat) => {
       const favorite = dataFavorites.find((fav) => {

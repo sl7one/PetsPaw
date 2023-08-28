@@ -7,10 +7,10 @@ import useMedia from '@/app/hooks/useMedia';
 
 export default function RoutName() {
    const { isMobile } = useMedia();
-   const path = usePathname();
-   const pathArr = path.split('/').filter((el) => !!el);
+   const path: string = usePathname();
+   const pathArr: string[] = path.split('/').filter((el) => !!el);
 
-   const items = pathArr.map((el, idx) => {
+   const items = pathArr.map((el: string, idx: number) => {
       const classes = (idx: number) => {
          if (isMobile) return 'rout-name primary';
          return idx === pathArr.length - 1

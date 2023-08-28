@@ -12,7 +12,7 @@ import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 
 interface IProps {
-   onChange: (value: { id: number; value: number | string }) => void;
+   onChange: (obj: { id: number; value: number | string }) => void;
    onClickSubmit: () => void;
    defaultValue: {
       breed: string;
@@ -27,7 +27,7 @@ export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IP
 
    const optionsBreeds: OptionType[] = useMemo(
       () =>
-         data.map(({ name, id }: { name: string }) => ({
+         data.map(({ name, id }: { name: string, id: string }) => ({
             label: name,
             value: id.toLowerCase(),
          })),
@@ -35,7 +35,7 @@ export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IP
    );
 
    return (
-      <form className="filter-form">
+      <form className="filter-form" onSubmit={onClickSubmit}>
          <div className="filter-form__top">
             <div className="filter-form__item">
                <span className="filter-form__label"> Order</span>
@@ -94,7 +94,6 @@ export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IP
             </div>
             <Button
                type="submit"
-               onClick={onClickSubmit}
                className="submit"
             >
                <Icon

@@ -4,7 +4,7 @@ import Icon from '../Icon/Icon';
 import Modal from '../Modal/Modal';
 
 export default function ButtonUpload() {
-   const modalRef = useRef(null);
+   const modalRef = useRef<HTMLDivElement>(null);
 
    const onClickUpload = () => {
       if (modalRef.current) {
