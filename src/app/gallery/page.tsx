@@ -47,8 +47,8 @@ const Gallery = () => {
    } = useFetch({
       api_cb: getFavorites,
    });
-
-   const onChange = ({ id, value }: { id: number; value: number | string }) => {
+   //@ts-ignore
+   const onChange = ({ id, value }) => {
       setForm((prev) => ({ ...prev, [id]: value }));
    };
 
@@ -78,7 +78,7 @@ const Gallery = () => {
    });
 
    //@ts-ignore
-   const onClickItem = async ({ id, favoriteId }: { is: string; favoriteId: number }) => {
+   const onClickItem = async ({ id, favoriteId }) => {
       setHandleIsLoading(true);
       if (favoriteId) {
          await deleteFromFavorites(favoriteId);
