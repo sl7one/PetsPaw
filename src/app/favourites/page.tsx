@@ -51,7 +51,7 @@ const Breeds = () => {
 
    const {
       data: dataFavorites = null,
-      isLoading: isLoadingFavorites,
+      // isLoading: isLoadingFavorites,
    } = useFetch({
       api_cb: getFavorites,
    });
@@ -112,6 +112,7 @@ const Breeds = () => {
                               width={40}
                               height={40}
                               className="like-gallery-item"
+                              isDisabled={isLoadingVotes}
                            >
                               {!favoriteId ? (
                                  <Icon
