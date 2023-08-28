@@ -1,5 +1,3 @@
-import './globals.scss';
-import 'modern-normalize/modern-normalize.css';
 import type { Metadata } from 'next';
 import { Jost } from 'next/font/google';
 
