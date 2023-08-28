@@ -90,6 +90,9 @@ const Gallery = () => {
       setHandleIsLoading(false);
    };
 
+   if (!data.length) return;
+   if (!dataFavorites?.length) return;
+
    return (
       <main className="gallery home container">
          {!isMobile && !isTablet && <LesftSection />}
@@ -128,8 +131,8 @@ const Gallery = () => {
                            onClick={
                               handleIsLoading
                                  ? () => {}
-                                 //@ts-ignore
-                                 : () => onClickItem({ id, favoriteId })
+                                 : //@ts-ignore
+                                   () => onClickItem({ id, favoriteId })
                            }
                         >
                            {
