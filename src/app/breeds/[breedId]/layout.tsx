@@ -1,5 +1,5 @@
 
-import '../../global.scss';
+import '../../globals.scss';
 import 'modern-normalize/modern-normalize.css';
 
 import type { Metadata } from 'next';
