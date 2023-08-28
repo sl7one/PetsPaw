@@ -92,7 +92,7 @@ const Voting = () => {
                      <div className="thumb">
                         <Image
                            //@ts-ignore
-                           src={dataCats[0]?.url || '/default.jpg'}
+                           src={dataCats[0]?.url || './default.jpg'}
                            //@ts-ignore
                            width={dataCats[0]?.width || 500}
                            //@ts-ignore

@@ -10,7 +10,7 @@ export default function Navigation() {
    return (
       <nav className="home__left-wrapper">
          <MainButton
-            linkImage="/voting.png"
+            linkImage="./voting.png"
             linkPath="/voting"
             linkName="voting"
             className="voting"
@@ -19,7 +19,7 @@ export default function Navigation() {
             isActive={path === '/voting' ? true : false}
          />
          <MainButton
-            linkImage="/breeds.png"
+            linkImage="./breeds.png"
             linkPath="/breeds"
             linkName="breeds"
             className="breeds"
@@ -28,7 +28,7 @@ export default function Navigation() {
             isActive={path === '/breeds' ? true : false}
          />
          <MainButton
-            linkImage="/gallery.png"
+            linkImage="./gallery.png"
             linkPath="/gallery"
             linkName="gallery"
             className="gallery"

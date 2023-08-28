@@ -154,7 +154,7 @@ const Breeds = () => {
                            className="gallery-list__item"
                         >
                            <Image
-                              src={image?.url ? image.url : '/default.jpg'}
+                              src={image?.url ? image.url : './default.jpg'}
                               alt={name}
                               width={image?.width && 500}
                               height={image?.height && 500}
