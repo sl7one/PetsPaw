@@ -7,14 +7,10 @@ import { postCatImage } from '@/app/API/api';
 import Loader from '../Loader/Loader';
 import Icon from '../Icon/Icon';
 
-interface FileWithPreview extends File {
-   preview: string;
-}
-
 export default function DropZone() {
-   const [files, setFiles] = useState<FileWithPreview[]>([]);
+   const [files, setFiles] = useState([]);
    const [isLoading, setIsLoading] = useState(false);
-   const [isApproved, setIsApproved] = useState<number>(0);
+   const [isApproved, setIsApproved] = useState < number > 0;
    const { getRootProps, getInputProps } = useDropzone({
       accept: {
          'image/jpeg': [],
@@ -55,16 +51,15 @@ export default function DropZone() {
 
       setIsLoading(true);
       try {
-          await postCatImage(formData);
+         await postCatImage(formData);
          setFiles([]);
          setIsApproved(1);
       } catch (error) {
          setIsApproved(-1);
-
       } finally {
          setIsLoading(false);
       }
-   }, [files]);
+   }, [files, setIsApproved]);
 
    return (
       <>
@@ -72,7 +67,7 @@ export default function DropZone() {
             <div {...getRootProps()}>
                <input {...getInputProps()} />
 
-               <div className={`drop-zone__box ${isApproved === -1 && "failed"}`}>
+               <div className={`drop-zone__box ${isApproved === -1 && 'failed'}`}>
                   {thumbs.length > 0 ? (
                      thumbs
                   ) : (
