@@ -10,7 +10,7 @@ import Icon from '../Icon/Icon';
 export default function DropZone() {
    const [files, setFiles] = useState([]);
    const [isLoading, setIsLoading] = useState(false);
-   const [isApproved, setIsApproved] = useState < number > 0;
+   const [isApproved, setIsApproved] = useState(0);
    const { getRootProps, getInputProps } = useDropzone({
       accept: {
          'image/jpeg': [],
