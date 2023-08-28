@@ -45,7 +45,7 @@ const BreedPage = ({ params: { breedId } }: IProps) => {
       data: dataSingle,
       isLoading: isLoadingSingle,
       error: errorSingle,
-   }: IState = useFetch({
+   }: any = useFetch({
       api_cb: useCallback(() => getSingleBreed(breedId), [breedId]),
    });
 
@@ -53,7 +53,7 @@ const BreedPage = ({ params: { breedId } }: IProps) => {
       data: dataLimited,
       isLoading: isLoadingLimited,
       error: errorLimited,
-   }: IState = useFetch({
+   }: any = useFetch({
       api_cb: useCallback(() => getBreedsImgLimited(breedId), [breedId]),
    });
 
