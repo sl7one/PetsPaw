@@ -67,7 +67,10 @@ export default function DropZone() {
             <div {...getRootProps()}>
                <input {...getInputProps()} />
 
-               <div className={`drop-zone__box ${isApproved === -1 && 'failed'}`}>
+               <div
+                  className={`drop-zone__box ${isApproved === -1 && 'failed'}`}
+                  style={{ backgroundImage: url('./default.jpg') }}
+               >
                   {thumbs.length > 0 ? (
                      thumbs
                   ) : (
