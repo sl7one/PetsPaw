@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback,  useState } from 'react';
 import BackComponent from '../components/BackComponent/BackComponent';
 import LesftSection from '../components/LeftSection/LesftSection';
 import { getVotes } from '../API/api';
@@ -30,7 +30,6 @@ const Likes = () => {
    const {
       data: catsData,
       isLoading: catsIsLoading,
-      error: catsError,
    } = useFetch({
       api_cb: getVotes,
    });

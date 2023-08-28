@@ -44,7 +44,6 @@ const Breeds = () => {
    const {
       data: dataVotes = null,
       isLoading: isLoadingVotes,
-      error: errorVotes,
    } = useFetch({
       api_cb: getVotes,
       dependency: vote,
@@ -53,7 +52,6 @@ const Breeds = () => {
    const {
       data: dataFavorites = null,
       isLoading: isLoadingFavorites,
-      error: errorFavorites,
    } = useFetch({
       api_cb: getFavorites,
    });

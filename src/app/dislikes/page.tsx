@@ -31,7 +31,6 @@ const Dislikes = () => {
    const {
       data: catsData,
       isLoading: catsIsLoading,
-      error: catsError,
    } = useFetch({
       api_cb: getVotes,
    });

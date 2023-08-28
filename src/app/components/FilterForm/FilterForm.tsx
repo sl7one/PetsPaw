@@ -23,7 +23,7 @@ interface IProps {
 }
 
 export default function FilterForm({ onChange, onClickSubmit, defaultValue }: IProps) {
-   const { data, isLoading, error } = useFetch({ api_cb: getBreeds, storage: false });
+   const { data, isLoading } = useFetch({ api_cb: getBreeds, storage: false });
 
    const optionsBreeds: OptionType[] = useMemo(
       () =>

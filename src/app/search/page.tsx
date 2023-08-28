@@ -26,7 +26,6 @@ const Search = () => {
    const {
       data: catsData,
       isLoading: catsIsLoading,
-      error: catsError,
    } = useFetch({
       api_cb: getBreeds,
       storage: true,

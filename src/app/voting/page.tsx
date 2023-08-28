@@ -35,7 +35,6 @@ const Voting = () => {
    const {
       data: dataCats = null,
       isLoading: isLoadingCats,
-      error: errorCats,
    } = useFetch({
       api_cb: getRandom,
       dependency: vote,
@@ -44,7 +43,6 @@ const Voting = () => {
    const {
       data: dataVotes = null,
       isLoading: isLoadingVotes,
-      error: errorVotes,
    } = useFetch({
       api_cb: getVotes,
       dependency: vote,
