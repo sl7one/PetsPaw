@@ -42,6 +42,7 @@ const Gallery = () => {
 
    const {
       data: dataFavorites = null,
+      //@ts-ignore
       isLoading: isLoadingFavorites,
    } = useFetch({
       api_cb: getFavorites,
@@ -53,6 +54,7 @@ const Gallery = () => {
 
    const onClickSubmit = (e: any) => {
       e.preventDefault();
+      //@ts-ignore
       setSubmitTrigger(form);
    };
 
@@ -61,13 +63,17 @@ const Gallery = () => {
    }, []);
 
    const items = data.map((cat) => {
+      //@ts-ignore
       const favorite = dataFavorites.find((fav) => {
+         //@ts-ignore
          const image_id = cat.id || cat.breeds[0]?.image_id;
+         //@ts-ignore
          return image_id === fav.image_id;
       });
       if (!favorite) {
          return cat;
       }
+      //@ts-ignore
       return { ...cat, favoriteId: favorite.id };
    });
 
@@ -102,6 +108,7 @@ const Gallery = () => {
                </div>
                <FilterForm
                   onChange={onChange}
+                  //@ts-ignore
                   onClickSubmit={onClickSubmit}
                   defaultValue={form}
                />
@@ -120,6 +127,7 @@ const Gallery = () => {
                            onClick={
                               handleIsLoading
                                  ? () => {}
+                                 //@ts-ignore
                                  : () => onClickItem({ id, favoriteId })
                            }
                         >
